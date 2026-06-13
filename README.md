@@ -2,6 +2,8 @@
 
 Single-user knowledge graph explorer with interactive 3D navigation.
 
+![Landing](docs/home.png)
+
 ## Features
 
 - Left click a node to view details in sidebar.
