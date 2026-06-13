@@ -1,0 +1,32 @@
+{
+  "appId": "com.mapper.knowledgeuniverse",
+  "productName": "Knowledge Universe Mapper",
+  "files": [
+    "dist/**/*",
+    "electron/**/*",
+    "package.json"
+  ],
+  "directories": {
+    "buildResources": "build"
+  },
+  "asar": true,
+  "win": {
+    "target": ["nsis"],
+    "artifactName": "Knowledge-Universe-Mapper-Setup-${version}.${ext}",
+    "signAndEditExecutable": false
+  },
+  "mac": {
+    "target": ["dmg"],
+    "artifactName": "Knowledge-Universe-Mapper-${version}.${ext}"
+  },
+  "linux": {
+    "target": ["AppImage"],
+    "artifactName": "Knowledge-Universe-Mapper-${version}.${ext}"
+  },
+  "nsis": {
+    "oneClick": false,
+    "allowToChangeInstallationDirectory": true,
+    "createDesktopShortcut": true,
+    "createStartMenuShortcut": true
+  }
+}
