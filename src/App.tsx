@@ -659,6 +659,48 @@ function App() {
     setInfoMessage('Snapshot downloaded. Git commit is available in desktop mode.')
   }
 
+  const handleUploadGraph = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0]
+    if (!file) {
+      return
+    }
+
+    const reader = new FileReader()
+    reader.onload = (e) => {
+      try {
+        const content = e.target?.result as string
+        const uploadedGraph = JSON.parse(content) as GraphData
+        
+        // Validate that it has the required structure
+        if (!uploadedGraph.rootId || !uploadedGraph.nodes || !uploadedGraph.edges) {
+          setErrorMessage('Invalid graph JSON: missing rootId, nodes, or edges.')
+          return
+        }
+
+        changeMessageRef.current = 'Uploaded graph from JSON file'
+        setGraph(uploadedGraph)
+        setCurrentNodeId(uploadedGraph.rootId)
+        setSelectedNodeId(uploadedGraph.rootId)
+        setAdminSelectedNodeId(uploadedGraph.rootId)
+        setAdminExpandedNodeIds([uploadedGraph.rootId])
+        setHistory([])
+        setSearchText('')
+        setErrorMessage(null)
+        setInfoMessage(`Graph updated with ${Object.keys(uploadedGraph.nodes).length} nodes and ${uploadedGraph.edges.length} edges.`)
+      } catch (error) {
+        const message = error instanceof Error ? error.message : 'Unknown error'
+        setErrorMessage(`Failed to parse JSON: ${message}`)
+      }
+    }
+
+    reader.onerror = () => {
+      setErrorMessage('Failed to read file.')
+    }
+
+    reader.readAsText(file)
+    event.target.value = ''
+  }
+
   const handleNavigateIn = (nodeId: string) => {
     if (nodeId === activeCurrentNodeId || !graph.nodes[nodeId]) {
       return
@@ -1852,6 +1894,29 @@ function App() {
 
         <button
           type="button"
+          className="upload-button"
+          title="Upload graph (JSON)"
+          onClick={() => {
+            const input = document.getElementById('graph-upload-input') as HTMLInputElement
+            input?.click()
+          }}
+          aria-label="Upload graph"
+        >
+          <svg className="icon-upload" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <path d="M12 21V11m0 0 4 4m-4-4-4 4M4 3h16" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round" />
+          </svg>
+        </button>
+        <input
+          id="graph-upload-input"
+          type="file"
+          accept=".json,application/json"
+          onChange={handleUploadGraph}
+          style={{ display: 'none' }}
+          aria-hidden="true"
+        />
+
+        <button
+          type="button"
           className="save-db-button"
           title="Save graph to IndexedDB"
           onClick={() => {
@@ -1865,7 +1930,6 @@ function App() {
             <path d="M5 21h14V7H5v14zM5 7l7-4 7 4" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        {/* upload button removed per request */}
       </div>
 
       <details className="legend-panel">
