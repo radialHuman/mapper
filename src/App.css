@@ -220,6 +220,42 @@
   padding: 5px 10px;
 }
 
+.admin-relation-item {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.admin-link-button {
+  border-radius: 999px;
+  border: 1px solid rgba(152, 210, 255, 0.55);
+  background: rgba(6, 16, 38, 0.75);
+  color: #eaf7ff;
+}
+
+.admin-remove-button {
+  border-radius: 999px;
+  border: 1px solid rgba(255, 156, 156, 0.62);
+  background: rgba(112, 19, 19, 0.58);
+  color: #ffe8e8;
+}
+
+.admin-danger-zone {
+  margin-top: 16px;
+  border-top: 1px solid rgba(255, 164, 164, 0.38);
+  padding-top: 10px;
+}
+
+.admin-delete-node {
+  width: auto;
+  min-width: 180px;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 140, 140, 0.72);
+  background: linear-gradient(135deg, rgba(174, 23, 23, 0.84), rgba(120, 10, 10, 0.9));
+  color: #fff0f0;
+  padding: 8px 14px;
+}
+
 @keyframes panel-in {
   from {
     opacity: 0;
@@ -430,11 +466,42 @@
   border-bottom: none;
 }
 
-.parent-list {
+.parent-selected-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  max-height: 140px;
+  overflow: auto;
+  padding: 8px;
+  border-radius: 6px;
+  border: 1px solid rgba(145, 194, 247, 0.46);
+  background: rgba(6, 18, 43, 0.5);
+}
+
+.parent-selected-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  font-size: 13px;
+  color: #dff1ff;
+}
+
+.parent-selected-item button {
+  width: auto;
+  margin-top: 0;
+  border-radius: 999px;
+  border: 1px solid rgba(255, 162, 162, 0.62);
+  background: rgba(112, 19, 19, 0.58);
+  color: #ffe8e8;
+  padding: 4px 10px;
+}
+
+.parent-option-list {
   display: grid;
   grid-template-columns: 1fr;
   gap: 4px;
-  max-height: 140px;
+  max-height: 180px;
   overflow: auto;
   padding: 6px;
   border-radius: 6px;
@@ -442,16 +509,29 @@
   background: rgba(6, 18, 43, 0.5);
 }
 
-.parent-list label {
+.parent-option-list button {
   display: flex;
-  align-items: center;
+  justify-content: space-between;
   gap: 8px;
-  margin: 0;
+  text-align: left;
+  border-radius: 8px;
 }
 
-.parent-list input {
-  width: 16px;
-  margin-top: 0;
+.parent-option-list button span {
+  color: #9fc2e7;
+  font-size: 11px;
+}
+
+.parent-option-list button.selected {
+  border-color: rgba(138, 223, 255, 0.86);
+  background: linear-gradient(135deg, rgba(38, 132, 192, 0.75), rgba(18, 86, 148, 0.78));
+}
+
+.parent-option-list p,
+.parent-selected-list p {
+  margin: 0;
+  font-size: 12px;
+  color: #c8e2ff;
 }
 
 .error-box {

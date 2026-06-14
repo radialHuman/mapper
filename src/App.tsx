@@ -74,6 +74,29 @@ function parseCsv(text: string) {
     .filter(Boolean)
 }
 
+function toNodeIdFromLabel(label: string) {
+  const normalized = label
+    .trim()
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, '-')
+    .replace(/^-+|-+$/g, '')
+  return normalized || 'node'
+}
+
+function buildUniqueNodeId(label: string, nodes: Record<string, GraphNode>) {
+  const base = toNodeIdFromLabel(label)
+  if (!nodes[base]) {
+    return base
+  }
+
+  let counter = 2
+  while (nodes[`${base}-${counter}`]) {
+    counter += 1
+  }
+
+  return `${base}-${counter}`
+}
+
 function metadataListFromNode(node: GraphNode | undefined, key: string) {
   if (!node) {
     return [] as string[]
@@ -145,6 +168,7 @@ function App() {
   const [newNodeDescription, setNewNodeDescription] = useState('')
   const [newNodeMetadataText, setNewNodeMetadataText] = useState('{\n  "kind": "custom"\n}')
   const [newNodeParentIds, setNewNodeParentIds] = useState<string[]>([initial.rootId])
+  const [newNodeParentSearchText, setNewNodeParentSearchText] = useState('')
 
   const [newEdgeSource, setNewEdgeSource] = useState(initial.rootId)
   const [newEdgeTarget, setNewEdgeTarget] = useState('')
@@ -223,6 +247,14 @@ function App() {
     localStorage.setItem(OVERLAY_STYLE_KEY, JSON.stringify(overlayStyle))
   }, [overlayStyle])
 
+  useEffect(() => {
+    const node = graph.nodes[adminSelectedNodeId] ?? graph.nodes[selectedNodeId]
+    if (!node) {
+      return
+    }
+    setEditorState(buildEditorState(node))
+  }, [adminSelectedNodeId, graph.nodes, selectedNodeId])
+
   const visibleNodeIds = useMemo(() => {
     if (!currentNode) {
       return [] as string[]
@@ -276,6 +308,19 @@ function App() {
       })
       .slice(0, 12)
   }, [graph.nodes, searchText])
+
+  const parentSelectionOptions = useMemo(() => {
+    const needle = newNodeParentSearchText.trim().toLowerCase()
+    return Object.values(graph.nodes)
+      .filter((node) => {
+        if (!needle) {
+          return true
+        }
+        return node.label.toLowerCase().includes(needle) || node.id.toLowerCase().includes(needle)
+      })
+      .sort((a, b) => a.label.localeCompare(b.label))
+      .slice(0, 80)
+  }, [graph.nodes, newNodeParentSearchText])
 
   const selectNodeForEditing = (nodeId: string) => {
     const node = graph.nodes[nodeId]
@@ -697,7 +742,7 @@ function App() {
       return
     }
 
-    const id = makeId()
+    const id = buildUniqueNodeId(label, graph.nodes)
     changeMessageRef.current = `Added node ${label}`
     const avg = validParents.reduce(
       (acc, parentId) => {
@@ -766,6 +811,158 @@ function App() {
     setNewNodeLabel('')
     setNewNodeDescription('')
     setNewNodeMetadataText('{\n  "kind": "custom"\n}')
+    setNewNodeParentSearchText('')
+  }
+
+  const removeParentLink = (parentId: string) => {
+    const node = adminSelectedNode
+    if (!node) {
+      return
+    }
+
+    if (!node.parents.includes(parentId)) {
+      setErrorMessage('Selected parent link does not exist.')
+      return
+    }
+
+    changeMessageRef.current = `Removed parent ${parentId} from ${node.id}`
+    setGraph((old) => {
+      const parent = old.nodes[parentId]
+      const child = old.nodes[node.id]
+      if (!parent || !child) {
+        return old
+      }
+
+      const nextNodes: Record<string, GraphNode> = {
+        ...old.nodes,
+        [parentId]: {
+          ...parent,
+          children: parent.children.filter((id) => id !== node.id),
+        },
+        [node.id]: {
+          ...child,
+          parents: child.parents.filter((id) => id !== parentId),
+        },
+      }
+
+      const nextEdges = old.edges.filter(
+        (edge) => !(edge.type === 'hierarchy' && edge.source === parentId && edge.target === node.id),
+      )
+
+      return {
+        ...old,
+        nodes: nextNodes,
+        edges: nextEdges,
+      }
+    })
+
+    setInfoMessage('Parent removed successfully.')
+    setErrorMessage(null)
+  }
+
+  const removeChildLink = (childId: string) => {
+    const node = adminSelectedNode
+    if (!node) {
+      return
+    }
+
+    if (!node.children.includes(childId)) {
+      setErrorMessage('Selected child link does not exist.')
+      return
+    }
+
+    changeMessageRef.current = `Removed child ${childId} from ${node.id}`
+    setGraph((old) => {
+      const parent = old.nodes[node.id]
+      const child = old.nodes[childId]
+      if (!parent || !child) {
+        return old
+      }
+
+      const nextNodes: Record<string, GraphNode> = {
+        ...old.nodes,
+        [node.id]: {
+          ...parent,
+          children: parent.children.filter((id) => id !== childId),
+        },
+        [childId]: {
+          ...child,
+          parents: child.parents.filter((id) => id !== node.id),
+        },
+      }
+
+      const nextEdges = old.edges.filter(
+        (edge) => !(edge.type === 'hierarchy' && edge.source === node.id && edge.target === childId),
+      )
+
+      return {
+        ...old,
+        nodes: nextNodes,
+        edges: nextEdges,
+      }
+    })
+
+    setInfoMessage('Child removed successfully.')
+    setErrorMessage(null)
+  }
+
+  const deleteSelectedNode = () => {
+    const node = adminSelectedNode
+    if (!node) {
+      return
+    }
+
+    if (node.id === graph.rootId) {
+      setErrorMessage('Root node cannot be deleted.')
+      return
+    }
+
+    const confirmed = window.confirm(
+      `Delete node "${node.label}" (${node.id})? This will remove all direct parent/child links and edges.`,
+    )
+    if (!confirmed) {
+      return
+    }
+
+    const fallbackId =
+      [...node.parents, ...node.children, graph.rootId].find((id) => id !== node.id && Boolean(graph.nodes[id])) ??
+      Object.keys(graph.nodes).find((id) => id !== node.id) ??
+      graph.rootId
+
+    changeMessageRef.current = `Deleted node ${node.label}`
+    setGraph((old) => {
+      const nextNodes: Record<string, GraphNode> = { ...old.nodes }
+      delete nextNodes[node.id]
+
+      for (const existingNode of Object.values(nextNodes)) {
+        const nextParents = existingNode.parents.filter((id) => id !== node.id)
+        const nextChildren = existingNode.children.filter((id) => id !== node.id)
+
+        if (nextParents.length !== existingNode.parents.length || nextChildren.length !== existingNode.children.length) {
+          nextNodes[existingNode.id] = {
+            ...existingNode,
+            parents: nextParents,
+            children: nextChildren,
+          }
+        }
+      }
+
+      const nextEdges = old.edges.filter((edge) => edge.source !== node.id && edge.target !== node.id)
+
+      return {
+        ...old,
+        nodes: nextNodes,
+        edges: nextEdges,
+      }
+    })
+
+    setHistory((old) => old.filter((id) => id !== node.id))
+    setCurrentNodeId((old) => (old === node.id ? fallbackId : old))
+    setSelectedNodeId(fallbackId)
+    setAdminSelectedNodeId(fallbackId)
+    setAdminExpandedNodeIds((old) => old.filter((id) => id !== node.id))
+    setInfoMessage(`Deleted node ${node.label}.`)
+    setErrorMessage(null)
   }
 
   const addEdge = () => {
@@ -826,6 +1023,82 @@ function App() {
         ],
       }
     })
+
+    setInfoMessage('Connection added successfully.')
+  }
+
+  const removeEdge = () => {
+    setErrorMessage(null)
+
+    if (!newEdgeSource || !newEdgeTarget) {
+      setErrorMessage('Choose source and target nodes.')
+      return
+    }
+
+    if (!graph.nodes[newEdgeSource] || !graph.nodes[newEdgeTarget]) {
+      setErrorMessage('Invalid source or target.')
+      return
+    }
+
+    let removedCount = 0
+    setGraph((old) => {
+      const nextEdges = old.edges.filter((edge) => {
+        const matched =
+          edge.source === newEdgeSource &&
+          edge.target === newEdgeTarget &&
+          edge.type === newEdgeType
+        if (matched) {
+          removedCount += 1
+        }
+        return !matched
+      })
+
+      if (removedCount === 0) {
+        return old
+      }
+
+      if (newEdgeType !== 'hierarchy') {
+        return {
+          ...old,
+          edges: nextEdges,
+        }
+      }
+
+      const source = old.nodes[newEdgeSource]
+      const target = old.nodes[newEdgeTarget]
+      if (!source || !target) {
+        return {
+          ...old,
+          edges: nextEdges,
+        }
+      }
+
+      return {
+        ...old,
+        nodes: {
+          ...old.nodes,
+          [newEdgeSource]: {
+            ...source,
+            children: source.children.filter((id) => id !== newEdgeTarget),
+          },
+          [newEdgeTarget]: {
+            ...target,
+            parents: target.parents.filter((id) => id !== newEdgeSource),
+          },
+        },
+        edges: nextEdges,
+      }
+    })
+
+    if (removedCount === 0) {
+      setErrorMessage('No matching connection found to remove.')
+      return
+    }
+
+    changeMessageRef.current = `Removed ${removedCount} ${newEdgeType} edge(s) ${newEdgeSource} -> ${newEdgeTarget}`
+    setInfoMessage(
+      `Removed ${removedCount} ${newEdgeType} connection${removedCount === 1 ? '' : 's'} successfully.`,
+    )
   }
 
   const resetData = () => {
@@ -933,17 +1206,47 @@ function App() {
           </label>
 
           <h4>Parents</h4>
-          <div className="parent-list">
-            {Object.values(graph.nodes).map((node) => (
-              <label key={node.id}>
-                <input
-                  type="checkbox"
-                  checked={newNodeParentIds.includes(node.id)}
-                  onChange={() => toggleParent(node.id)}
-                />
-                {node.label}
-              </label>
-            ))}
+          <label>
+            Search Parent Nodes
+            <input
+              value={newNodeParentSearchText}
+              onChange={(event) => setNewNodeParentSearchText(event.target.value)}
+              placeholder="Type to filter parents by name or id"
+            />
+          </label>
+
+          <div className="parent-selected-list">
+            {newNodeParentIds.length > 0 ? newNodeParentIds.map((parentId) => {
+              const parent = graph.nodes[parentId]
+              if (!parent) {
+                return null
+              }
+
+              return (
+                <div key={parentId} className="parent-selected-item">
+                  <span>{parent.label}</span>
+                  <button type="button" onClick={() => toggleParent(parentId)}>Remove</button>
+                </div>
+              )
+            }) : <p>No parents selected.</p>}
+          </div>
+
+          <div className="parent-option-list">
+            {parentSelectionOptions.length > 0 ? parentSelectionOptions.map((node) => {
+              const selected = newNodeParentIds.includes(node.id)
+              return (
+                <button
+                  key={node.id}
+                  type="button"
+                  className={selected ? 'selected' : ''}
+                  onClick={() => toggleParent(node.id)}
+                >
+                  {selected ? 'Selected: ' : 'Add: '}
+                  {node.label}
+                  <span>{node.id}</span>
+                </button>
+              )
+            }) : <p>No parent matches found.</p>}
           </div>
 
           <button type="button" onClick={addNode}>Add Node</button>
@@ -993,6 +1296,7 @@ function App() {
             />
           </label>
           <button type="button" onClick={addEdge}>Add Connection</button>
+          <button type="button" onClick={removeEdge}>Remove Connection</button>
         </section>
       )
     }
@@ -1309,18 +1613,28 @@ function App() {
                 <h4>Parents</h4>
                 <div className="admin-relation-list">
                   {nodeParents.length > 0 ? nodeParents.map((id) => (
-                    <button key={id} type="button" onClick={() => selectNodeForEditing(id)}>
-                      {graph.nodes[id]?.label ?? id}
-                    </button>
+                    <div key={id} className="admin-relation-item">
+                      <button type="button" className="admin-link-button" onClick={() => selectNodeForEditing(id)}>
+                        {graph.nodes[id]?.label ?? id}
+                      </button>
+                      <button type="button" className="admin-remove-button" onClick={() => removeParentLink(id)}>
+                        Remove
+                      </button>
+                    </div>
                   )) : <p>No parents.</p>}
                 </div>
 
                 <h4>Children</h4>
                 <div className="admin-relation-list">
                   {nodeChildren.length > 0 ? nodeChildren.map((id) => (
-                    <button key={id} type="button" onClick={() => selectNodeForEditing(id)}>
-                      {graph.nodes[id]?.label ?? id}
-                    </button>
+                    <div key={id} className="admin-relation-item">
+                      <button type="button" className="admin-link-button" onClick={() => selectNodeForEditing(id)}>
+                        {graph.nodes[id]?.label ?? id}
+                      </button>
+                      <button type="button" className="admin-remove-button" onClick={() => removeChildLink(id)}>
+                        Remove
+                      </button>
+                    </div>
                   )) : <p>No children.</p>}
                 </div>
 
@@ -1331,6 +1645,11 @@ function App() {
                       {graph.nodes[id]?.label ?? id}
                     </button>
                   )) : <p>No grandchildren.</p>}
+                </div>
+
+                <div className="admin-danger-zone">
+                  <h4>Remove Node</h4>
+                  <button type="button" className="admin-delete-node" onClick={deleteSelectedNode}>Delete This Node</button>
                 </div>
               </>
             ) : (

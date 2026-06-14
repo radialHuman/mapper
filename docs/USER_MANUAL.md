@@ -104,7 +104,7 @@ How to add a node:
 1. Enter Label (required)
 2. Enter Description (optional)
 3. Enter Metadata JSON object (required format: valid JSON object)
-4. Select one or more parent nodes
+4. Search parent nodes by label or ID and select one or more parents
 5. Click Add Node
 
 Validation rules:
@@ -115,8 +115,18 @@ Validation rules:
 
 Behavior after add:
 - New node is inserted
+- Node ID is generated from label (slug format). If duplicated, a numeric suffix is added.
 - Hierarchy edges are created from selected parent(s)
 - New node becomes selected
+
+### Admin Panel Quick Remove
+How to open:
+- Click Admin button
+
+Quick actions available for selected node:
+- Parents list: click Remove to unlink a parent instantly
+- Children list: click Remove to unlink a child instantly
+- Danger zone: click Delete This Node to remove the node and all connected edges (except root node, which is protected)
 
 ### Add Link Panel
 How to open:

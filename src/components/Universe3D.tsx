@@ -27,6 +27,14 @@ const EDGE_COLORS: Record<GraphEdge['type'], number> = {
   'depends-on': 0xffbe7d,
 }
 
+const NODE_RELATION_COLORS = {
+  current: 0xf6d889,
+  parent: 0xff9f6b,
+  child: 0x4edab5,
+  both: 0xd58dff,
+  unrelated: 0x57a6ff,
+} as const
+
 export default function Universe3D({
   nodes,
   edges,
@@ -112,6 +120,27 @@ export default function Universe3D({
     const idToLabel = new Map<string, THREE.Sprite>()
     const edgeLines: EdgeLineRecord[] = []
     const nodeById = new Map(nodes.map((node) => [node.id, node]))
+    const currentNode = nodeById.get(currentNodeId)
+
+    const getNodeColor = (node: GraphNode) => {
+      if (node.id === currentNodeId) {
+        return NODE_RELATION_COLORS.current
+      }
+
+      const isParent = Boolean(currentNode?.parents.includes(node.id))
+      const isChild = Boolean(currentNode?.children.includes(node.id))
+
+      if (isParent && isChild) {
+        return NODE_RELATION_COLORS.both
+      }
+      if (isParent) {
+        return NODE_RELATION_COLORS.parent
+      }
+      if (isChild) {
+        return NODE_RELATION_COLORS.child
+      }
+      return NODE_RELATION_COLORS.unrelated
+    }
 
     const hierarchyGeometry = new THREE.SphereGeometry(20, 24, 24)
     const regularGeometry = new THREE.SphereGeometry(14, 20, 20)
@@ -157,7 +186,7 @@ export default function Universe3D({
       const isCurrent = node.id === currentNodeId
       const geometry = isCurrent ? hierarchyGeometry : regularGeometry
       const material = new THREE.MeshStandardMaterial({
-        color: isCurrent ? 0xf6d889 : 0x57a6ff,
+        color: getNodeColor(node),
         emissive: node.id === selectedNodeId ? 0x1e6631 : 0x0f1c43,
         roughness: 0.44,
         metalness: 0.22,
