@@ -92,28 +92,30 @@
 .vertical-actions {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 10px;
   position: absolute;
-  top: 84px; /* position under home button */
+  top: 64px; /* positioned under home button */
   left: 16px;
+  z-index: 12;
 }
 
 .vertical-actions button {
-  background: rgba(255, 255, 255, 0.06);
-  border: 1px solid rgba(255, 255, 255, 0.06);
-  color: #e8f4ff;
+  background: linear-gradient(135deg,
+    rgb(12 33 65 / var(--floating-opacity)),
+    rgb(6 16 38 / calc(var(--floating-opacity) * 0.92)));
+  color: #eaf7ff;
+  border: 1px solid rgba(152, 210, 255, 0.55);
   padding: 8px;
-  border-radius: 8px;
-  width: 44px;
-  height: 44px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  border-radius: 999px;
+  width: 46px;
+  height: 40px;
+  display: grid;
+  place-items: center;
+  cursor: pointer;
+  box-shadow: 0 12px 30px rgba(2, 7, 20, 0.34);
 }
 
-.vertical-actions .icon-download,
-.vertical-actions .icon-save,
-.vertical-actions .icon-upload {
+.vertical-actions svg {
   width: 20px;
   height: 20px;
 }

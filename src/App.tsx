@@ -1833,34 +1833,7 @@ function App() {
             <path d="M5 21h14V7H5v14zM5 7l7-4 7 4" strokeWidth="1" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round" />
           </svg>
         </button>
-        <button
-          type="button"
-          className="upload-button"
-          title="Upload graph to server"
-          onClick={async () => {
-            try {
-              const res = await fetch('/api/graphs', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify(graph),
-              })
-              if (!res.ok) {
-                const text = await res.text()
-                setErrorMessage(`Upload failed: ${res.status} ${text}`)
-                return
-              }
-              setInfoMessage('Graph uploaded to server.')
-              setTimeout(() => setInfoMessage(null), 2500)
-            } catch (err) {
-              setErrorMessage(`Upload error: ${String(err)}`)
-            }
-          }}
-          aria-label="Upload graph"
-        >
-          <svg className="icon-upload" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
-            <path d="M12 3v12m0 0-4-4m4 4 4-4M4 21h16" strokeWidth="1.5" stroke="currentColor" fill="none" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-        </button>
+        {/* upload button removed per request */}
       </div>
 
       <details className="legend-panel">
