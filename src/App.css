@@ -72,6 +72,10 @@
   top: 14px;
   left: 16px;
   z-index: 11;
+  width: 46px;
+  height: 40px;
+  display: grid;
+  place-items: center;
   border-radius: 999px;
   border: 1px solid rgba(152, 210, 255, 0.55);
   background: linear-gradient(135deg,
@@ -85,6 +89,12 @@
   box-shadow: 0 12px 30px rgba(2, 7, 20, 0.34);
 }
 
+.icon-home {
+  width: 18px;
+  height: 18px;
+  fill: #eaf7ff;
+}
+
 .home-button:hover {
   filter: brightness(1.08);
 }
@@ -94,7 +104,7 @@
   left: 16px;
   bottom: 16px;
   z-index: 11;
-  width: min(280px, calc(100vw - 24px));
+  width: 132px;
   border-radius: 12px;
   border: 1px solid rgba(152, 210, 255, 0.45);
   background: linear-gradient(160deg, rgba(8, 25, 56, 0.78), rgba(5, 15, 36, 0.86));
@@ -107,15 +117,36 @@
   cursor: pointer;
   user-select: none;
   list-style: none;
+  min-height: 40px;
+  display: grid;
+  place-items: center;
   color: #e8f4ff;
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.2px;
-  padding: 8px 11px;
+  padding: 0;
 }
 
 .legend-panel summary::-webkit-details-marker {
   display: none;
+}
+
+.icon-legend {
+  width: 18px;
+  height: 18px;
+  fill: #eaf7ff;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 .legend-content {
@@ -672,6 +703,6 @@
   .legend-panel {
     left: 10px;
     bottom: 94px;
-    width: min(260px, calc(100vw - 20px));
+    width: 102px;
   }
 }

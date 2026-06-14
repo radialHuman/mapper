@@ -1736,10 +1736,20 @@ function App() {
 
       <div className="focus-chip">Universe: {currentNode?.label ?? 'N/A'}</div>
 
-      <button type="button" className="home-button" onClick={goToHomeUniverse}>Home</button>
+      <button type="button" className="home-button" onClick={goToHomeUniverse} aria-label="Home">
+        <svg className="icon-home" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+          <path d="M12 3 3 10h2v10h5v-6h4v6h5V10h2L12 3z" />
+        </svg>
+      </button>
 
       <details className="legend-panel">
-        <summary>Legend</summary>
+        <summary aria-label="Legend">
+          <svg className="icon-legend" viewBox="0 0 24 24" aria-hidden="true" focusable="false">
+            <circle cx="12" cy="12" r="10" />
+            <path d="M12 10.3a1.3 1.3 0 1 0 0-2.6 1.3 1.3 0 0 0 0 2.6ZM10.9 11.9h2.2v4.7h-2.2z" />
+          </svg>
+          <span className="sr-only">Legend</span>
+        </summary>
         <div className="legend-content">
           <h4>Node Colors</h4>
           <ul className="legend-list">
