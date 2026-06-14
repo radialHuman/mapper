@@ -127,6 +127,8 @@ export default function Universe3D({
     renderer.setSize(mount.clientWidth, mount.clientHeight)
     renderer.shadowMap.enabled = true
     renderer.shadowMap.type = THREE.PCFSoftShadowMap
+    renderer.toneMapping = THREE.ACESFilmicToneMapping
+    renderer.toneMappingExposure = 1.02
     mount.appendChild(renderer.domElement)
 
     const controls = new OrbitControls(camera, renderer.domElement)
@@ -145,11 +147,30 @@ export default function Universe3D({
     key.castShadow = true
     key.shadow.mapSize.set(512, 512)
     key.shadow.bias = -0.0006
+    key.shadow.camera.near = 120
+    key.shadow.camera.far = 1700
+    key.shadow.camera.left = -900
+    key.shadow.camera.right = 900
+    key.shadow.camera.top = 900
+    key.shadow.camera.bottom = -900
     scene.add(key)
 
     const fill = new THREE.DirectionalLight(selectedTheme.fill, 0.5)
     fill.position.set(-300, -90, -280)
     scene.add(fill)
+
+    const rim = new THREE.PointLight(0xbddcff, 0.16, 1600, 2)
+    rim.position.set(-420, 240, 420)
+    scene.add(rim)
+
+    const shadowCatcher = new THREE.Mesh(
+      new THREE.PlaneGeometry(3600, 3600),
+      new THREE.ShadowMaterial({ opacity: 0.09 }),
+    )
+    shadowCatcher.rotation.x = -Math.PI / 2
+    shadowCatcher.position.y = -520
+    shadowCatcher.receiveShadow = true
+    scene.add(shadowCatcher)
 
     const placeAnchor = randomFarPosition(1350, 1850, -180, 780)
     const placeGlow = new THREE.Mesh(
@@ -543,6 +564,10 @@ export default function Universe3D({
       placeGlow.geometry.dispose()
       const placeGlowMaterial = placeGlow.material as THREE.Material
       placeGlowMaterial.dispose()
+
+      shadowCatcher.geometry.dispose()
+      const shadowCatcherMaterial = shadowCatcher.material as THREE.Material
+      shadowCatcherMaterial.dispose()
 
       placeDust.geometry.dispose()
       const placeDustMaterial = placeDust.material as THREE.Material
