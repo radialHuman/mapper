@@ -814,6 +814,67 @@ function App() {
     setNewNodeParentSearchText('')
   }
 
+  const moveNodeToNewPosition = (nodeId: string) => {
+    const node = graph.nodes[nodeId]
+    if (!node) {
+      setErrorMessage('Select a valid node first.')
+      return
+    }
+
+    changeMessageRef.current = `Moved node ${node.label}`
+    setGraph((old) => {
+      const existing = old.nodes[nodeId]
+      if (!existing) {
+        return old
+      }
+
+      const anchorNodes = [...existing.parents, ...existing.children]
+        .map((id) => old.nodes[id])
+        .filter(Boolean)
+
+      let center = existing.position
+      if (anchorNodes.length > 0) {
+        const total = anchorNodes.reduce(
+          (acc, anchor) => ({
+            x: acc.x + anchor.position.x,
+            y: acc.y + anchor.position.y,
+            z: acc.z + anchor.position.z,
+          }),
+          { x: 0, y: 0, z: 0 },
+        )
+        center = {
+          x: total.x / anchorNodes.length,
+          y: total.y / anchorNodes.length,
+          z: total.z / anchorNodes.length,
+        }
+      }
+
+      const theta = Math.random() * Math.PI * 2
+      const phi = Math.random() * Math.PI
+      const radius = anchorNodes.length > 0 ? 150 + Math.random() * 130 : 240 + Math.random() * 220
+
+      const nextPosition = {
+        x: center.x + Math.cos(theta) * Math.sin(phi) * radius,
+        y: center.y + Math.cos(phi) * radius,
+        z: center.z + Math.sin(theta) * Math.sin(phi) * radius,
+      }
+
+      return {
+        ...old,
+        nodes: {
+          ...old.nodes,
+          [nodeId]: {
+            ...existing,
+            position: nextPosition,
+          },
+        },
+      }
+    })
+
+    setInfoMessage(`Moved ${node.label} to a new position.`)
+    setErrorMessage(null)
+  }
+
   const removeParentLink = (parentId: string) => {
     const node = adminSelectedNode
     if (!node) {
@@ -1460,6 +1521,7 @@ function App() {
                 </label>
 
                 <button type="button" onClick={saveNodeEdits}>Save Node Changes</button>
+                <button type="button" onClick={() => moveNodeToNewPosition(selectedNode.id)}>Move Node Position</button>
               </div>
             )}
 
@@ -1608,6 +1670,7 @@ function App() {
                     />
                   </label>
                   <button type="button" onClick={saveNodeEdits}>Save Node Changes</button>
+                  <button type="button" onClick={() => moveNodeToNewPosition(node.id)}>Move Node Position</button>
                 </div>
 
                 <h4>Parents</h4>
