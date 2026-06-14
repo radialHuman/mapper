@@ -32,6 +32,8 @@ import { saveNodeEdits, addNode, moveNodeToNewPosition, removeParentLink, remove
 import { addEdge, removeEdge } from './handlers/edgeHandlers'
 import { handleNavigateIn, handleNavigateOut, handleSelectNode, selectSearchResult, goToHomeUniverse } from './handlers/navigationHandlers'
 import { handleUploadGraph, exportAndCommitGraph } from './handlers/fileHandlers'
+import { useAddNodeForm } from './hooks/useAddNodeForm'
+import { validateAddNodeForm } from './utils/addNodeUtils'
 import './App.css'
 
 type PanelMode = 'none' | 'details' | 'search' | 'add-node' | 'add-edge' | 'style' | 'history' | 'admin'
@@ -45,11 +47,9 @@ function App() {
   const [history, setHistory] = useState<string[]>([])
   const [searchText, setSearchText] = useState('')
 
-  const [newNodeLabel, setNewNodeLabel] = useState('')
-  const [newNodeDescription, setNewNodeDescription] = useState('')
-  const [newNodeMetadataText, setNewNodeMetadataText] = useState('{\n  "kind": "custom"\n}')
-  const [newNodeParentIds, setNewNodeParentIds] = useState<string[]>([initial.rootId])
-  const [newNodeParentSearchText, setNewNodeParentSearchText] = useState('')
+  // ===== ADD NODE FORM STATE (managed by custom hook) =====
+  const addNodeForm = useAddNodeForm(initial.rootId)
+  // ========================================================
 
   const [newEdgeSource, setNewEdgeSource] = useState(initial.rootId)
   const [newEdgeTarget, setNewEdgeTarget] = useState('')
@@ -117,7 +117,7 @@ function App() {
       setAdminSelectedNodeId(persisted.rootId)
       setAdminExpandedNodeIds([persisted.rootId])
       setEditorState(buildEditorState(persisted.nodes[persisted.rootId]))
-      setNewNodeParentIds([persisted.rootId])
+      addNodeForm.setNewNodeParentIds([persisted.rootId])
       setNewEdgeSource(persisted.rootId)
       previousGraphRef.current = persisted
       hydratedRef.current = true
@@ -200,18 +200,10 @@ function App() {
   }, [graph.nodes, searchText])
 
   // Parent selection options
-  const parentSelectionOptions = useMemo(() => {
-    const needle = newNodeParentSearchText.trim().toLowerCase()
-    return Object.values(graph.nodes)
-      .filter((node) => {
-        if (!needle) {
-          return true
-        }
-        return node.label.toLowerCase().includes(needle) || node.id.toLowerCase().includes(needle)
-      })
-      .sort((a, b) => a.label.localeCompare(b.label))
-      .slice(0, 80)
-  }, [graph.nodes, newNodeParentSearchText])
+  const parentSelectionOptions = useMemo(
+    () => addNodeForm.getParentSelectionOptions(graph),
+    [addNodeForm, graph],
+  )
 
   // Select node for editing
   const selectNodeForEditing = (nodeId: string) => {
@@ -443,28 +435,25 @@ function App() {
   }
 
   // Handler: Toggle parent
-  const toggleParent = (id: string) => {
-    setNewNodeParentIds((old) => {
-      if (old.includes(id)) {
-        return old.filter((item) => item !== id)
-      }
-      return [...old, id]
-    })
-  }
-
-  // Handler: Add node
+  // ===== ADD NODE HANDLERS (grouped with related logic) =====
   const handleAddNode = () => {
-    const metadata = parseMetadata(newNodeMetadataText)
-    if (!metadata) {
-      setErrorMessage('Metadata must be valid JSON object values.')
+    // Validate form inputs
+    const validation = validateAddNodeForm(
+      addNodeForm.newNodeLabel,
+      addNodeForm.newNodeMetadataText,
+      addNodeForm.newNodeParentIds,
+    )
+
+    if (!validation.isValid) {
+      setErrorMessage(validation.error || 'Invalid input')
       return
     }
 
     const newNodeData = addNode(
-      newNodeLabel,
-      newNodeDescription,
-      metadata,
-      newNodeParentIds,
+      addNodeForm.newNodeLabel,
+      addNodeForm.newNodeDescription,
+      parseMetadata(addNodeForm.newNodeMetadataText)!,
+      addNodeForm.newNodeParentIds,
       graph,
       setErrorMessage,
       (msg) => {
@@ -477,13 +466,11 @@ function App() {
       setSelectedNodeId(newNodeData.id)
       setAdminSelectedNodeId(newNodeData.id)
       setEditorState(buildEditorState(newNodeData))
-      setNewNodeLabel('')
-      setNewNodeDescription('')
-      setNewNodeMetadataText('{\n  "kind": "custom"\n}')
-      setNewNodeParentSearchText('')
+      addNodeForm.resetForm()
       setInfoMessage('Node added successfully.')
     }
   }
+  // ========================================================
 
   // Handler: Move node
   const handleMoveNodePosition = (nodeId: string) => {
@@ -646,16 +633,16 @@ function App() {
       case 'add-node':
         return (
           <AddNodePanel
-            newNodeLabel={newNodeLabel}
-            onSetNewNodeLabel={setNewNodeLabel}
-            newNodeDescription={newNodeDescription}
-            onSetNewNodeDescription={setNewNodeDescription}
-            newNodeMetadataText={newNodeMetadataText}
-            onSetNewNodeMetadataText={setNewNodeMetadataText}
-            newNodeParentIds={newNodeParentIds}
-            onToggleParent={toggleParent}
-            newNodeParentSearchText={newNodeParentSearchText}
-            onSetNewNodeParentSearchText={setNewNodeParentSearchText}
+            newNodeLabel={addNodeForm.newNodeLabel}
+            onSetNewNodeLabel={addNodeForm.setNewNodeLabel}
+            newNodeDescription={addNodeForm.newNodeDescription}
+            onSetNewNodeDescription={addNodeForm.setNewNodeDescription}
+            newNodeMetadataText={addNodeForm.newNodeMetadataText}
+            onSetNewNodeMetadataText={addNodeForm.setNewNodeMetadataText}
+            newNodeParentIds={addNodeForm.newNodeParentIds}
+            onToggleParent={addNodeForm.onToggleParent}
+            newNodeParentSearchText={addNodeForm.newNodeParentSearchText}
+            onSetNewNodeParentSearchText={addNodeForm.setNewNodeParentSearchText}
             parentSelectionOptions={parentSelectionOptions}
             graph={graph}
             onAddNode={handleAddNode}
