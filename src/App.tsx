@@ -182,6 +182,9 @@ function App() {
   const [adminSearchText, setAdminSearchText] = useState('')
   const [adminSelectedNodeId, setAdminSelectedNodeId] = useState(initial.rootId)
   const [adminExpandedNodeIds, setAdminExpandedNodeIds] = useState<string[]>([initial.rootId])
+  const [showResetConfirmation, setShowResetConfirmation] = useState(false)
+  const [resetConfirmationInput, setResetConfirmationInput] = useState('')
+  const [resetVerificationCode, setResetVerificationCode] = useState('')
 
   const changeMessageRef = useRef<string | null>(null)
   const previousGraphRef = useRef<GraphData>(initial)
@@ -1181,6 +1184,24 @@ function App() {
     setSearchText('')
     setErrorMessage(null)
     setInfoMessage('Graph reset to seed data.')
+    setShowResetConfirmation(false)
+    setResetConfirmationInput('')
+  }
+
+  const openResetConfirmation = () => {
+    const code = Math.random().toString(36).substring(2, 6).toUpperCase()
+    setResetVerificationCode(code)
+    setResetConfirmationInput('')
+    setShowResetConfirmation(true)
+  }
+
+  const handleConfirmReset = () => {
+    if (resetConfirmationInput.toUpperCase() === resetVerificationCode) {
+      resetData()
+    } else {
+      setErrorMessage('Verification code does not match. Please try again.')
+      setResetConfirmationInput('')
+    }
   }
 
   const goToHomeUniverse = () => {
@@ -1423,11 +1444,20 @@ function App() {
             {versions.length === 0 ? (
               <p>No versions yet. Make edits to create snapshots.</p>
             ) : (
-              versions.map((version) => (
+              versions.map((version, index) => (
                 <div key={version.id} className="version-card">
                   <div className="version-time">{new Date(version.createdAt).toLocaleString()}</div>
                   <div className="version-message">{version.message}</div>
-                  <button type="button" onClick={() => restoreVersion(version)}>Restore</button>
+                  <div style={{ display: 'flex', gap: '6px' }}>
+                    <button type="button" onClick={() => restoreVersion(version)}>Restore</button>
+                    {index > 0 && (
+                      <button type="button" onClick={() => {
+                        const previousVersion = versions[index - 1]
+                        restoreVersion(previousVersion)
+                        setInfoMessage(`Undid version: ${version.message}`)
+                      }}>Undo</button>
+                    )}
+                  </div>
                 </div>
               ))
             )}
@@ -1713,6 +1743,9 @@ function App() {
                 <div className="admin-danger-zone">
                   <h4>Remove Node</h4>
                   <button type="button" className="admin-delete-node" onClick={deleteSelectedNode}>Delete This Node</button>
+                  
+                  <h4 style={{ marginTop: '16px' }}>Reset Graph</h4>
+                  <button type="button" className="admin-delete-node" onClick={openResetConfirmation}>Reset All Data</button>
                 </div>
               </>
             ) : (
@@ -1794,7 +1827,6 @@ function App() {
         >
           Admin
         </button>
-        <button type="button" onClick={resetData}>Reset</button>
       </div>
 
       <div className="focus-chip">Universe: {currentNode?.label ?? 'N/A'}</div>
@@ -1896,6 +1928,42 @@ function App() {
           {errorMessage && <div className="error-box">{errorMessage}</div>}
           {infoMessage && <div className="info-box">{infoMessage}</div>}
         </aside>
+      )}
+
+      {showResetConfirmation && (
+        <div className="reset-confirmation-overlay">
+          <div className="reset-confirmation-dialog">
+            <h3>⚠️ Reset All Data</h3>
+            <p>This will permanently reset your graph to the original seed data. This action cannot be undone.</p>
+            <p>To confirm you are conscious and understand this action, please type the following code:</p>
+            <div style={{ background: 'rgba(0, 0, 0, 0.3)', padding: '10px', borderRadius: '8px', marginBottom: '16px', textAlign: 'center', fontFamily: 'monospace', fontSize: '18px', color: '#ffd700', fontWeight: 'bold', letterSpacing: '4px' }}>
+              {resetVerificationCode}
+            </div>
+            <label>
+              Enter the code above:
+              <input
+                type="text"
+                placeholder="Type the code here"
+                value={resetConfirmationInput}
+                onChange={(e) => setResetConfirmationInput(e.target.value)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' && resetConfirmationInput.toUpperCase() === resetVerificationCode) {
+                    handleConfirmReset()
+                  }
+                }}
+              />
+            </label>
+            <div className="dialog-buttons">
+              <button type="button" onClick={() => {
+                setShowResetConfirmation(false)
+                setResetConfirmationInput('')
+              }}>Cancel</button>
+              <button type="button" className="confirm-button" onClick={handleConfirmReset} disabled={!resetConfirmationInput}>
+                Reset
+              </button>
+            </div>
+          </div>
+        </div>
       )}
     </div>
   )

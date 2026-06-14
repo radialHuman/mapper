@@ -342,8 +342,9 @@
 
 .admin-relation-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 8px;
 }
 
 .admin-relation-list button {
@@ -354,8 +355,9 @@
 
 .admin-relation-item {
   display: flex;
-  align-items: center;
-  gap: 6px;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
 }
 
 .admin-link-button {
@@ -363,6 +365,9 @@
   border: 1px solid rgba(152, 210, 255, 0.55);
   background: rgba(6, 16, 38, 0.75);
   color: #eaf7ff;
+  padding: 6px 12px;
+  width: 100%;
+  text-align: left;
 }
 
 .admin-remove-button {
@@ -370,6 +375,8 @@
   border: 1px solid rgba(255, 156, 156, 0.62);
   background: rgba(112, 19, 19, 0.58);
   color: #ffe8e8;
+  padding: 6px 12px;
+  width: auto;
 }
 
 .admin-danger-zone {
@@ -492,7 +499,7 @@
 .editor-grid {
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: 16px;
   margin-top: 10px;
 }
 
@@ -736,4 +743,91 @@
     bottom: 94px;
     width: 102px;
   }
+}
+
+.reset-confirmation-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.reset-confirmation-dialog {
+  background: linear-gradient(160deg,
+      rgb(6 18 42 / 0.98),
+      rgb(9 22 55 / 0.96));
+  border: 2px solid rgba(255, 100, 100, 0.5);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 400px;
+  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.8);
+}
+
+.reset-confirmation-dialog h3 {
+  margin: 0 0 12px;
+  color: #fff;
+  font-size: 18px;
+}
+
+.reset-confirmation-dialog p {
+  margin: 0 0 16px;
+  color: #e2f0ff;
+  font-size: 14px;
+}
+
+.reset-confirmation-dialog label {
+  display: block;
+  color: #e2f0ff;
+  margin-bottom: 8px;
+  font-size: 13px;
+}
+
+.reset-confirmation-dialog input {
+  width: 100%;
+  padding: 10px;
+  margin-top: 4px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(142, 192, 248, 0.62);
+  background: rgba(6, 20, 48, 0.72);
+  color: #ebf6ff;
+  box-sizing: border-box;
+  font-size: 14px;
+}
+
+.reset-confirmation-dialog .dialog-buttons {
+  display: flex;
+  gap: 10px;
+  justify-content: flex-end;
+}
+
+.reset-confirmation-dialog button {
+  padding: 8px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(142, 192, 248, 0.62);
+  background: rgba(6, 20, 48, 0.72);
+  color: #ebf6ff;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.reset-confirmation-dialog button:hover {
+  background: rgba(20, 40, 70, 0.9);
+}
+
+.reset-confirmation-dialog .confirm-button {
+  background: linear-gradient(135deg, rgba(174, 23, 23, 0.84), rgba(120, 10, 10, 0.9));
+  border-color: rgba(255, 140, 140, 0.72);
+  color: #fff0f0;
+}
+
+.reset-confirmation-dialog .confirm-button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
 }
