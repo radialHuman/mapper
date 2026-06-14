@@ -29,11 +29,9 @@
   width: 132px;
   border-radius: 999px;
   border: 1px solid rgba(152, 210, 255, 0.55);
-  background: linear-gradient(
-    135deg,
-    rgb(12 33 65 / var(--floating-opacity)),
-    rgb(6 16 38 / calc(var(--floating-opacity) * 0.92))
-  );
+  background: linear-gradient(135deg,
+      rgb(12 33 65 / var(--floating-opacity)),
+      rgb(6 16 38 / calc(var(--floating-opacity) * 0.92)));
   color: #eaf7ff;
   padding: 10px 14px;
   cursor: pointer;
@@ -47,11 +45,9 @@
 }
 
 .floating-actions button.active {
-  background: linear-gradient(
-    135deg,
-    rgb(44 125 217 / calc(var(--floating-opacity) + 0.08)),
-    rgb(9 36 96 / calc(var(--floating-opacity) + 0.14))
-  );
+  background: linear-gradient(135deg,
+      rgb(44 125 217 / calc(var(--floating-opacity) + 0.08)),
+      rgb(9 36 96 / calc(var(--floating-opacity) + 0.14)));
   border-color: rgba(182, 225, 255, 0.82);
 }
 
@@ -74,15 +70,13 @@
 .home-button {
   position: absolute;
   top: 14px;
-  right: 16px;
+  left: 16px;
   z-index: 11;
   border-radius: 999px;
   border: 1px solid rgba(152, 210, 255, 0.55);
-  background: linear-gradient(
-    135deg,
-    rgb(12 33 65 / var(--floating-opacity)),
-    rgb(6 16 38 / calc(var(--floating-opacity) * 0.92))
-  );
+  background: linear-gradient(135deg,
+      rgb(12 33 65 / var(--floating-opacity)),
+      rgb(6 16 38 / calc(var(--floating-opacity) * 0.92)));
   color: #eaf7ff;
   padding: 8px 14px;
   cursor: pointer;
@@ -108,11 +102,9 @@
   overflow: auto;
   padding: 14px;
   border-radius: 18px;
-  background: linear-gradient(
-    160deg,
-    rgb(6 18 42 / var(--sidebar-opacity)),
-    rgb(9 22 55 / calc(var(--sidebar-opacity) * 0.84))
-  );
+  background: linear-gradient(160deg,
+      rgb(6 18 42 / var(--sidebar-opacity)),
+      rgb(9 22 55 / calc(var(--sidebar-opacity) * 0.84)));
   border: 1px solid rgba(146, 198, 255, 0.38);
   backdrop-filter: blur(14px);
   box-shadow: 0 16px 42px rgba(3, 9, 24, 0.45);
@@ -132,11 +124,9 @@
   overflow: hidden;
   padding: 14px;
   border-radius: 18px;
-  background: linear-gradient(
-    160deg,
-    rgb(6 18 42 / var(--sidebar-opacity)),
-    rgb(9 22 55 / calc(var(--sidebar-opacity) * 0.84))
-  );
+  background: linear-gradient(160deg,
+      rgb(6 18 42 / var(--sidebar-opacity)),
+      rgb(9 22 55 / calc(var(--sidebar-opacity) * 0.84)));
   border: 1px solid rgba(146, 198, 255, 0.38);
   backdrop-filter: blur(14px);
   box-shadow: 0 16px 42px rgba(3, 9, 24, 0.45);
@@ -235,6 +225,7 @@
     opacity: 0;
     transform: translateX(12px);
   }
+
   to {
     opacity: 1;
     transform: translateX(0);

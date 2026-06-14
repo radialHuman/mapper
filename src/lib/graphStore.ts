@@ -275,17 +275,17 @@ function readGraphFromIndexedDB(): Promise<GraphData | null> {
   return new Promise((resolve, reject) => {
     openGraphDb()
       .then((db) => {
-      const tx = db.transaction(GRAPH_STORE_NAME, 'readonly')
-      const store = tx.objectStore(GRAPH_STORE_NAME)
-      const request = store.get(GRAPH_PRIMARY_KEY)
+        const tx = db.transaction(GRAPH_STORE_NAME, 'readonly')
+        const store = tx.objectStore(GRAPH_STORE_NAME)
+        const request = store.get(GRAPH_PRIMARY_KEY)
 
-      request.onsuccess = () => {
-        const result = request.result as GraphData | undefined
-        resolve(result ?? null)
-      }
-      request.onerror = () => reject(request.error)
-      tx.oncomplete = () => db.close()
-      tx.onabort = () => db.close()
+        request.onsuccess = () => {
+          const result = request.result as GraphData | undefined
+          resolve(result ?? null)
+        }
+        request.onerror = () => reject(request.error)
+        tx.oncomplete = () => db.close()
+        tx.onabort = () => db.close()
       })
       .catch((error) => reject(error))
   })
@@ -295,14 +295,14 @@ function saveGraphToIndexedDB(graph: GraphData): Promise<void> {
   return new Promise((resolve, reject) => {
     openGraphDb()
       .then((db) => {
-      const tx = db.transaction(GRAPH_STORE_NAME, 'readwrite')
-      const store = tx.objectStore(GRAPH_STORE_NAME)
-      const request = store.put(graph, GRAPH_PRIMARY_KEY)
+        const tx = db.transaction(GRAPH_STORE_NAME, 'readwrite')
+        const store = tx.objectStore(GRAPH_STORE_NAME)
+        const request = store.put(graph, GRAPH_PRIMARY_KEY)
 
-      request.onsuccess = () => resolve()
-      request.onerror = () => reject(request.error)
-      tx.oncomplete = () => db.close()
-      tx.onabort = () => db.close()
+        request.onsuccess = () => resolve()
+        request.onerror = () => reject(request.error)
+        tx.oncomplete = () => db.close()
+        tx.onabort = () => db.close()
       })
       .catch((error) => reject(error))
   })
