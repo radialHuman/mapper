@@ -1,0 +1,524 @@
+{
+  "nodes": {
+    "universe": {
+      "id": "universe",
+      "label": "Knowledge Universe",
+      "description": "Root of your personal map.",
+      "metadata": {
+        "kind": "root",
+        "pioneers": [],
+        "books": []
+      },
+      "parents": [],
+      "children": [
+        "science",
+        "mathematics",
+        "humanities"
+      ],
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
+    },
+    "science": {
+      "id": "science",
+      "label": "Science",
+      "description": "Natural science domains.",
+      "metadata": {
+        "domain": "STEM"
+      },
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "physics",
+        "biology"
+      ],
+      "position": {
+        "x": -240,
+        "y": -120,
+        "z": -80
+      }
+    },
+    "mathematics": {
+      "id": "mathematics",
+      "label": "Mathematics",
+      "description": "Formal systems and structures.",
+      "metadata": {
+        "domain": "STEM",
+        "pioneers": [
+          "Euclid",
+          "Carl Friedrich Gauss",
+          "David Hilbert"
+        ],
+        "wikipedia": "https://en.wikipedia.org/wiki/Mathematics",
+        "books": [
+          "How to Solve It - George Polya",
+          "A Mathematician's Apology - G.H. Hardy"
+        ]
+      },
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "algebra",
+        "calculus",
+        "geometry",
+        "physics"
+      ],
+      "position": {
+        "x": 180,
+        "y": -170,
+        "z": 70
+      }
+    },
+    "humanities": {
+      "id": "humanities",
+      "label": "Humanities",
+      "description": "Culture, history, arts, language.",
+      "metadata": {
+        "domain": "social"
+      },
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "history"
+      ],
+      "position": {
+        "x": 290,
+        "y": 130,
+        "z": -20
+      }
+    },
+    "physics": {
+      "id": "physics",
+      "label": "Physics",
+      "description": "Study of matter, energy, and interactions.",
+      "metadata": {
+        "level": "advanced",
+        "pioneers": [
+          "Isaac Newton",
+          "Albert Einstein",
+          "Marie Curie"
+        ],
+        "wikipedia": "https://en.wikipedia.org/wiki/Physics",
+        "books": [
+          "The Feynman Lectures on Physics - Richard Feynman"
+        ]
+      },
+      "parents": [
+        "science",
+        "mathematics"
+      ],
+      "children": [
+        "astrophysics",
+        "quantum-mechanics"
+      ],
+      "position": {
+        "x": -40,
+        "y": -10,
+        "z": 120
+      }
+    },
+    "biology": {
+      "id": "biology",
+      "label": "Biology",
+      "description": "Life and living systems.",
+      "metadata": {
+        "level": "intermediate"
+      },
+      "parents": [
+        "science"
+      ],
+      "children": [],
+      "position": {
+        "x": -340,
+        "y": 120,
+        "z": -120
+      }
+    },
+    "algebra": {
+      "id": "algebra",
+      "label": "Algebra",
+      "description": "Symbols and abstract structures.",
+      "metadata": {
+        "level": "intermediate"
+      },
+      "parents": [
+        "mathematics"
+      ],
+      "children": [
+        "linear-algebra",
+        "abstract-algebra"
+      ],
+      "position": {
+        "x": 300,
+        "y": -280,
+        "z": 90
+      }
+    },
+    "calculus": {
+      "id": "calculus",
+      "label": "Calculus",
+      "description": "Change and accumulation.",
+      "metadata": {
+        "level": "intermediate",
+        "pioneers": [
+          "Isaac Newton",
+          "Gottfried Wilhelm Leibniz"
+        ],
+        "wikipedia": "https://en.wikipedia.org/wiki/Calculus",
+        "books": [
+          "Calculus - Michael Spivak",
+          "Calculus: Early Transcendentals - James Stewart"
+        ]
+      },
+      "parents": [
+        "mathematics"
+      ],
+      "children": [
+        "differential-equations"
+      ],
+      "position": {
+        "x": 10,
+        "y": -300,
+        "z": 170
+      }
+    },
+    "geometry": {
+      "id": "geometry",
+      "label": "Geometry",
+      "description": "Shapes, spaces, and spatial reasoning.",
+      "metadata": {
+        "level": "intermediate"
+      },
+      "parents": [
+        "mathematics"
+      ],
+      "children": [
+        "topology"
+      ],
+      "position": {
+        "x": 240,
+        "y": -60,
+        "z": 200
+      }
+    },
+    "linear-algebra": {
+      "id": "linear-algebra",
+      "label": "Linear Algebra",
+      "description": "Vector spaces, matrices, and linear maps.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "algebra"
+      ],
+      "children": [
+        "eigenvectors"
+      ],
+      "position": {
+        "x": 360,
+        "y": -350,
+        "z": 150
+      }
+    },
+    "abstract-algebra": {
+      "id": "abstract-algebra",
+      "label": "Abstract Algebra",
+      "description": "Groups, rings, and fields.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "algebra"
+      ],
+      "children": [],
+      "position": {
+        "x": 390,
+        "y": -250,
+        "z": 10
+      }
+    },
+    "eigenvectors": {
+      "id": "eigenvectors",
+      "label": "Eigenvectors",
+      "description": "Special vectors preserved by linear transformations.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "linear-algebra"
+      ],
+      "children": [],
+      "position": {
+        "x": 430,
+        "y": -420,
+        "z": 220
+      }
+    },
+    "differential-equations": {
+      "id": "differential-equations",
+      "label": "Differential Equations",
+      "description": "Equations involving derivatives and dynamic systems.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "calculus"
+      ],
+      "children": [
+        "nonlinear-dynamics"
+      ],
+      "position": {
+        "x": -80,
+        "y": -380,
+        "z": 250
+      }
+    },
+    "nonlinear-dynamics": {
+      "id": "nonlinear-dynamics",
+      "label": "Nonlinear Dynamics",
+      "description": "Complex behavior in nonlinear systems.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "differential-equations"
+      ],
+      "children": [],
+      "position": {
+        "x": -160,
+        "y": -430,
+        "z": 320
+      }
+    },
+    "topology": {
+      "id": "topology",
+      "label": "Topology",
+      "description": "Properties preserved under continuous deformation.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "geometry"
+      ],
+      "children": [],
+      "position": {
+        "x": 330,
+        "y": 30,
+        "z": 250
+      }
+    },
+    "astrophysics": {
+      "id": "astrophysics",
+      "label": "Astrophysics",
+      "description": "Physical laws applied to celestial objects.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "physics"
+      ],
+      "children": [],
+      "position": {
+        "x": -140,
+        "y": 140,
+        "z": 210
+      }
+    },
+    "quantum-mechanics": {
+      "id": "quantum-mechanics",
+      "label": "Quantum Mechanics",
+      "description": "Behavior of systems at atomic scales.",
+      "metadata": {
+        "level": "advanced"
+      },
+      "parents": [
+        "physics"
+      ],
+      "children": [],
+      "position": {
+        "x": 70,
+        "y": 200,
+        "z": 150
+      }
+    },
+    "history": {
+      "id": "history",
+      "label": "History",
+      "description": "Human past and recorded events.",
+      "metadata": {
+        "domain": "humanities"
+      },
+      "parents": [
+        "humanities"
+      ],
+      "children": [],
+      "position": {
+        "x": 410,
+        "y": 320,
+        "z": -100
+      }
+    }
+  },
+  "edges": [
+    {
+      "id": "51951f52-3619-49e6-9812-b8cbf12c75f6",
+      "source": "science",
+      "target": "physics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "2f6128ec-b380-4530-9d7b-227c03b2caeb",
+      "source": "mathematics",
+      "target": "physics",
+      "type": "hierarchy",
+      "strength": 0.9
+    },
+    {
+      "id": "d0c172be-36d5-429d-aaa5-100416b517b9",
+      "source": "science",
+      "target": "biology",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "171a7bb0-72c2-48b2-a867-67975b0c6459",
+      "source": "mathematics",
+      "target": "algebra",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "0feea464-99d3-412c-9832-0a2311ead0c7",
+      "source": "mathematics",
+      "target": "calculus",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "f9d95136-fa77-45fc-aee1-ddf6ef1a1614",
+      "source": "mathematics",
+      "target": "geometry",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "2a23cf57-1d26-42b5-9313-dcba1afc1b87",
+      "source": "algebra",
+      "target": "linear-algebra",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "3b19e42a-2058-4d1f-b9cb-da9d8d2d8ae5",
+      "source": "algebra",
+      "target": "abstract-algebra",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "60eb971d-32e4-410d-824e-d5660318aa08",
+      "source": "linear-algebra",
+      "target": "eigenvectors",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "705368f6-cd3b-4911-8bbc-23fe2630063f",
+      "source": "calculus",
+      "target": "differential-equations",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "563a6cb9-a322-44e4-a664-342f3d796a90",
+      "source": "differential-equations",
+      "target": "nonlinear-dynamics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "5dbc21ae-5d85-411c-bcb1-b4fa0b3e519f",
+      "source": "geometry",
+      "target": "topology",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "967bba83-dd0b-42f5-ba49-dffc2d0d1531",
+      "source": "physics",
+      "target": "astrophysics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "405f3166-03af-47bc-8ab5-96ec3f23a28a",
+      "source": "physics",
+      "target": "quantum-mechanics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "03b5298b-e95c-4b88-b14c-abac1cdc9181",
+      "source": "humanities",
+      "target": "history",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "f1789e40-0c1d-4a1e-885f-96611a8d168b",
+      "source": "calculus",
+      "target": "physics",
+      "type": "related",
+      "strength": 0.72
+    },
+    {
+      "id": "a81576d3-243e-4ae9-b26a-68cec1943656",
+      "source": "linear-algebra",
+      "target": "physics",
+      "type": "related",
+      "strength": 0.77
+    },
+    {
+      "id": "c3ac5345-cb0d-4b21-91a4-625b2974bc50",
+      "source": "geometry",
+      "target": "astrophysics",
+      "type": "depends-on",
+      "strength": 0.63
+    },
+    {
+      "id": "1edff08b-638f-493d-9de7-e9ca79a77ce2",
+      "source": "astrophysics",
+      "target": "mathematics",
+      "type": "depends-on",
+      "strength": 0.81
+    },
+    {
+      "id": "22e424e8-0acb-46dd-a0b3-96ba65df41cc",
+      "source": "universe",
+      "target": "science",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "6c1c250c-3107-4706-b26d-184248ed871c",
+      "source": "universe",
+      "target": "mathematics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "c7cf3ec5-a171-4c32-9e17-c840fd455c9d",
+      "source": "universe",
+      "target": "humanities",
+      "type": "hierarchy",
+      "strength": 1
+    }
+  ],
+  "rootId": "universe"
+}
