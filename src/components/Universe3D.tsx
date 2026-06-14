@@ -125,6 +125,8 @@ export default function Universe3D({
     const renderer = new THREE.WebGLRenderer({ antialias: true })
     renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2))
     renderer.setSize(mount.clientWidth, mount.clientHeight)
+    renderer.shadowMap.enabled = true
+    renderer.shadowMap.type = THREE.PCFSoftShadowMap
     mount.appendChild(renderer.domElement)
 
     const controls = new OrbitControls(camera, renderer.domElement)
@@ -140,6 +142,9 @@ export default function Universe3D({
 
     const key = new THREE.DirectionalLight(selectedTheme.key, 0.8)
     key.position.set(330, 460, 300)
+    key.castShadow = true
+    key.shadow.mapSize.set(512, 512)
+    key.shadow.bias = -0.0006
     scene.add(key)
 
     const fill = new THREE.DirectionalLight(selectedTheme.fill, 0.5)
@@ -274,13 +279,15 @@ export default function Universe3D({
       const material = new THREE.MeshStandardMaterial({
         color: getNodeColor(node),
         emissive: node.id === selectedNodeId ? 0x1e6631 : 0x0f1c43,
-        roughness: 0.44,
-        metalness: 0.22,
+        roughness: 0.36,
+        metalness: 0.24,
       })
 
       const mesh = new THREE.Mesh(geometry, material)
       mesh.position.set(node.position.x, node.position.y, node.position.z)
       mesh.userData.nodeId = node.id
+      mesh.castShadow = true
+      mesh.receiveShadow = true
       nodeGroup.add(mesh)
       idToMesh.set(node.id, mesh)
 
