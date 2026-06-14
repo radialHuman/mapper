@@ -21,6 +21,21 @@ type EdgeLineRecord = {
   targetId: string
 }
 
+type SkyTheme = {
+  background: number
+  ambient: number
+  key: number
+  fill: number
+  haze: number
+}
+
+type ShootingStar = {
+  line: THREE.Line
+  velocity: THREE.Vector3
+  life: number
+  maxLife: number
+}
+
 const EDGE_COLORS: Record<GraphEdge['type'], number> = {
   hierarchy: 0x66d5ff,
   related: 0x91f5ba,
@@ -34,6 +49,41 @@ const NODE_RELATION_COLORS = {
   both: 0xd58dff,
   unrelated: 0x57a6ff,
 } as const
+
+const SKY_THEMES: SkyTheme[] = [
+  {
+    background: 0x070d20,
+    ambient: 0xe2ecff,
+    key: 0xbfd9ff,
+    fill: 0x89bcff,
+    haze: 0x1a2c5b,
+  },
+  {
+    background: 0x1b1324,
+    ambient: 0xffead4,
+    key: 0xffc7a3,
+    fill: 0xaa9dff,
+    haze: 0x55316a,
+  },
+  {
+    background: 0x101b2f,
+    ambient: 0xd8f0ff,
+    key: 0x9fddff,
+    fill: 0x7fbbff,
+    haze: 0x244978,
+  },
+]
+
+const GRAPH_CORE_RADIUS = 920
+
+function randomFarPosition(minRadius: number, maxRadius: number, minY: number, maxY: number) {
+  const angle = Math.random() * Math.PI * 2
+  const radius = minRadius + Math.random() * (maxRadius - minRadius)
+  const x = Math.cos(angle) * radius
+  const z = Math.sin(angle) * radius
+  const y = minY + Math.random() * (maxY - minY)
+  return new THREE.Vector3(x, y, z)
+}
 
 export default function Universe3D({
   nodes,
@@ -65,7 +115,9 @@ export default function Universe3D({
     }
 
     const scene = new THREE.Scene()
-    scene.background = new THREE.Color(0x060d1f)
+    const selectedTheme = SKY_THEMES[Math.floor(Math.random() * SKY_THEMES.length)]
+    scene.background = new THREE.Color(selectedTheme.background)
+    scene.fog = new THREE.FogExp2(selectedTheme.haze, 0.00018)
 
     const camera = new THREE.PerspectiveCamera(60, mount.clientWidth / mount.clientHeight, 1, 5000)
     camera.position.set(0, 260, 720)
@@ -83,16 +135,50 @@ export default function Universe3D({
     controls.minDistance = 120
     controls.target.set(0, 0, 0)
 
-    const ambient = new THREE.AmbientLight(0xffffff, 0.72)
+    const ambient = new THREE.AmbientLight(selectedTheme.ambient, 0.72)
     scene.add(ambient)
 
-    const key = new THREE.DirectionalLight(0xc7e3ff, 0.8)
+    const key = new THREE.DirectionalLight(selectedTheme.key, 0.8)
     key.position.set(330, 460, 300)
     scene.add(key)
 
-    const fill = new THREE.DirectionalLight(0x8bc3ff, 0.5)
+    const fill = new THREE.DirectionalLight(selectedTheme.fill, 0.5)
     fill.position.set(-300, -90, -280)
     scene.add(fill)
+
+    const placeAnchor = randomFarPosition(1350, 1850, -180, 780)
+    const placeGlow = new THREE.Mesh(
+      new THREE.SphereGeometry(200, 18, 18),
+      new THREE.MeshBasicMaterial({
+        color: selectedTheme.haze,
+        transparent: true,
+        opacity: 0.09,
+        depthWrite: false,
+      }),
+    )
+    placeGlow.position.copy(placeAnchor)
+    scene.add(placeGlow)
+
+    const placeDust = new THREE.Points(
+      new THREE.BufferGeometry(),
+      new THREE.PointsMaterial({
+        color: selectedTheme.fill,
+        transparent: true,
+        opacity: 0.12,
+        size: 2.1,
+        sizeAttenuation: true,
+        depthWrite: false,
+      }),
+    )
+    const dustPositions = new Float32Array(140 * 3)
+    for (let i = 0; i < 140; i += 1) {
+      dustPositions[i * 3] = (Math.random() - 0.5) * 300
+      dustPositions[i * 3 + 1] = (Math.random() - 0.5) * 220
+      dustPositions[i * 3 + 2] = (Math.random() - 0.5) * 300
+    }
+    placeDust.geometry.setAttribute('position', new THREE.BufferAttribute(dustPositions, 3))
+    placeDust.position.copy(placeAnchor)
+    scene.add(placeDust)
 
     const stars = new THREE.Points(
       new THREE.BufferGeometry(),
@@ -238,6 +324,36 @@ export default function Universe3D({
     let pendingNodeId: string | null = null
     const singleClickDelay = 260
 
+    const shootingStars: ShootingStar[] = []
+    let nextShootingStarIn = 3.5 + Math.random() * 5.5
+
+    const spawnShootingStar = () => {
+      const start = randomFarPosition(1500, 2200, 420, 1280)
+      const radial = start.clone().setY(0).normalize()
+      const tangent = new THREE.Vector3(-radial.z, 0, radial.x)
+      const direction = tangent
+        .add(new THREE.Vector3((Math.random() - 0.5) * 0.1, -0.05 - Math.random() * 0.06, (Math.random() - 0.5) * 0.1))
+        .normalize()
+
+      const length = 36 + Math.random() * 30
+      const tail = start.clone().addScaledVector(direction, -length)
+      const geometry = new THREE.BufferGeometry().setFromPoints([start, tail])
+      const material = new THREE.LineBasicMaterial({
+        color: 0xf2f9ff,
+        transparent: true,
+        opacity: 0.42,
+      })
+
+      const line = new THREE.Line(geometry, material)
+      scene.add(line)
+      shootingStars.push({
+        line,
+        velocity: direction.multiplyScalar(360 + Math.random() * 180),
+        life: 0,
+        maxLife: 0.36 + Math.random() * 0.34,
+      })
+    }
+
     const onContextMenu = (event: MouseEvent) => {
       event.preventDefault()
       exitRef.current()
@@ -301,13 +417,40 @@ export default function Universe3D({
     window.addEventListener('resize', onResize)
 
     let raf = 0
+    const clock = new THREE.Clock()
     const frustum = new THREE.Frustum()
     const projectionViewMatrix = new THREE.Matrix4()
     const nodeCullDistance = 2100
     const labelCullDistance = 1600
 
     const animate = () => {
+      const dt = Math.min(clock.getDelta(), 0.05)
       controls.update()
+
+      stars.rotation.y += dt * 0.01
+      placeDust.rotation.y += dt * 0.03
+
+      nextShootingStarIn -= dt
+      if (nextShootingStarIn <= 0 && shootingStars.length < 1) {
+        spawnShootingStar()
+        nextShootingStarIn = 4 + Math.random() * 7
+      }
+
+      for (let i = shootingStars.length - 1; i >= 0; i -= 1) {
+        const star = shootingStars[i]
+        star.life += dt
+        star.line.position.addScaledVector(star.velocity, dt)
+
+        const material = star.line.material as THREE.LineBasicMaterial
+        material.opacity = THREE.MathUtils.clamp(1 - star.life / star.maxLife, 0, 1)
+
+        if (star.line.position.length() < GRAPH_CORE_RADIUS + 220 || star.life >= star.maxLife) {
+          scene.remove(star.line)
+          star.line.geometry.dispose()
+          material.dispose()
+          shootingStars.splice(i, 1)
+        }
+      }
 
       camera.updateMatrixWorld()
       projectionViewMatrix.multiplyMatrices(camera.projectionMatrix, camera.matrixWorldInverse)
@@ -389,6 +532,21 @@ export default function Universe3D({
       stars.geometry.dispose()
       const starsMaterial = stars.material as THREE.Material
       starsMaterial.dispose()
+
+      placeGlow.geometry.dispose()
+      const placeGlowMaterial = placeGlow.material as THREE.Material
+      placeGlowMaterial.dispose()
+
+      placeDust.geometry.dispose()
+      const placeDustMaterial = placeDust.material as THREE.Material
+      placeDustMaterial.dispose()
+
+      for (const star of shootingStars) {
+        scene.remove(star.line)
+        star.line.geometry.dispose()
+        const starMaterial = star.line.material as THREE.Material
+        starMaterial.dispose()
+      }
 
       renderer.dispose()
       if (mount.contains(renderer.domElement)) {
