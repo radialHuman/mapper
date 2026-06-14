@@ -20,666 +20,1050 @@
         "finance",
         "arts-crafts"
       ],
-      "position": {"x": 0, "y": 0, "z": 0}
+      "position": {
+        "x": 0,
+        "y": 0,
+        "z": 0
+      }
     },
-
     "practical-skills": {
       "id": "practical-skills",
       "label": "Practical Life Skills",
       "description": "Essential skills for daily living not taught in school.",
       "metadata": {
         "domain": "practical",
-        "pioneers": ["Corey Wayne", "Ramit Sethi"],
-        "books": ["The Life-Changing Magic of Tidying Up - Marie Kondo", "The 7 Habits of Highly Effective People - Stephen Covey"]
+        "pioneers": [
+          "Corey Wayne",
+          "Ramit Sethi"
+        ],
+        "books": [
+          "The Life-Changing Magic of Tidying Up - Marie Kondo",
+          "The 7 Habits of Highly Effective People - Stephen Covey"
+        ]
       },
-      "parents": ["universe"],
-      "children": ["cooking", "home-maintenance", "negotiation", "time-management", "relationships"],
-      "position": {"x": -500, "y": 0, "z": 0}
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "cooking",
+        "home-maintenance",
+        "negotiation",
+        "time-management",
+        "relationships"
+      ],
+      "position": {
+        "x": -500,
+        "y": 0,
+        "z": 0
+      }
     },
-
     "cooking": {
       "id": "cooking",
       "label": "Cooking & Nutrition",
       "description": "Food preparation and nutritional knowledge.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Julia Child", "Gordon Ramsay", "Alice Waters"],
+        "pioneers": [
+          "Julia Child",
+          "Gordon Ramsay",
+          "Alice Waters"
+        ],
         "books": [
           "Mastering the Art of French Cooking - Julia Child",
           "Salt Fat Acid Heat - Samin Nosrat",
           "An Everlasting Meal - Tamar Adler"
         ]
       },
-      "parents": ["practical-skills"],
-      "children": ["meal-planning", "food-preservation", "culinary-techniques"],
-      "position": {"x": -600, "y": -150, "z": 50}
+      "parents": [
+        "practical-skills"
+      ],
+      "children": [
+        "meal-planning",
+        "food-preservation",
+        "culinary-techniques"
+      ],
+      "position": {
+        "x": -600,
+        "y": -150,
+        "z": 50
+      }
     },
-
     "meal-planning": {
       "id": "meal-planning",
       "label": "Meal Planning & Budgeting",
       "description": "Planning meals and managing food budget.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Michael Pollan"],
-        "books": ["In Defense of Food - Michael Pollan", "Budget Bytes - Beth Moncel"]
+        "pioneers": [
+          "Michael Pollan"
+        ],
+        "books": [
+          "In Defense of Food - Michael Pollan",
+          "Budget Bytes - Beth Moncel"
+        ]
       },
-      "parents": ["cooking"],
+      "parents": [
+        "cooking"
+      ],
       "children": [],
-      "position": {"x": -680, "y": -220, "z": 100}
+      "position": {
+        "x": -680,
+        "y": -220,
+        "z": 100
+      }
     },
-
     "food-preservation": {
       "id": "food-preservation",
       "label": "Food Preservation",
       "description": "Canning, fermentation, and storage techniques.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Sandor Katz"],
+        "pioneers": [
+          "Sandor Katz"
+        ],
         "books": [
           "The Art of Fermentation - Sandor Katz",
           "Ball Canning Guide - Ball Company"
         ]
       },
-      "parents": ["cooking"],
+      "parents": [
+        "cooking"
+      ],
       "children": [],
-      "position": {"x": -550, "y": -220, "z": 80}
+      "position": {
+        "x": -550,
+        "y": -220,
+        "z": 80
+      }
     },
-
     "culinary-techniques": {
       "id": "culinary-techniques",
       "label": "Culinary Techniques",
       "description": "Professional cooking methods and food science.",
       "metadata": {
         "level": "advanced",
-        "pioneers": ["Thomas Keller", "Ferran Adrià"],
+        "pioneers": [
+          "Thomas Keller",
+          "Ferran Adri\u00c3\u00a0"
+        ],
         "books": [
           "The Professional Chef - Culinary Institute of America",
           "Molecular Gastronomy - Nicolas Kurti"
         ]
       },
-      "parents": ["cooking"],
+      "parents": [
+        "cooking"
+      ],
       "children": [],
-      "position": {"x": -600, "y": -80, "z": 120}
+      "position": {
+        "x": -600,
+        "y": -80,
+        "z": 120
+      }
     },
-
     "home-maintenance": {
       "id": "home-maintenance",
       "label": "Home Maintenance & Repairs",
       "description": "Basic home repair, plumbing, electrical, carpentry.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Bob Vila"],
+        "pioneers": [
+          "Bob Vila"
+        ],
         "books": [
           "The Home Repair Bible - Albert Jackson & David Day",
           "How to Maintain Anything - Joseph Connelly"
         ]
       },
-      "parents": ["practical-skills"],
-      "children": ["plumbing", "electrical", "carpentry"],
-      "position": {"x": -500, "y": -180, "z": 40}
+      "parents": [
+        "practical-skills"
+      ],
+      "children": [
+        "plumbing",
+        "electrical",
+        "carpentry"
+      ],
+      "position": {
+        "x": -500,
+        "y": -180,
+        "z": 40
+      }
     },
-
     "plumbing": {
       "id": "plumbing",
       "label": "Plumbing Basics",
       "description": "Understanding and fixing water systems.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Homeowner's Plumbing Bible - James Ramsey"]
+        "books": [
+          "The Homeowner's Plumbing Bible - James Ramsey"
+        ]
       },
-      "parents": ["home-maintenance"],
+      "parents": [
+        "home-maintenance"
+      ],
       "children": [],
-      "position": {"x": -570, "y": -250, "z": 60}
+      "position": {
+        "x": -570,
+        "y": -250,
+        "z": 60
+      }
     },
-
     "electrical": {
       "id": "electrical",
       "label": "Electrical Work",
       "description": "Safe electrical repairs and installation.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Nikola Tesla"],
-        "books": ["Electrical Wiring: Residential - Ray C. Mullin"]
+        "pioneers": [
+          "Nikola Tesla"
+        ],
+        "books": [
+          "Electrical Wiring: Residential - Ray C. Mullin"
+        ]
       },
-      "parents": ["home-maintenance"],
+      "parents": [
+        "home-maintenance"
+      ],
       "children": [],
-      "position": {"x": -500, "y": -250, "z": 50}
+      "position": {
+        "x": -500,
+        "y": -250,
+        "z": 50
+      }
     },
-
     "carpentry": {
       "id": "carpentry",
       "label": "Carpentry & Woodworking",
       "description": "Building and crafting with wood.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Complete Modern Woodworker - Alexander Withers"]
+        "books": [
+          "The Complete Modern Woodworker - Alexander Withers"
+        ]
       },
-      "parents": ["home-maintenance"],
+      "parents": [
+        "home-maintenance"
+      ],
       "children": [],
-      "position": {"x": -430, "y": -250, "z": 70}
+      "position": {
+        "x": -430,
+        "y": -250,
+        "z": 70
+      }
     },
-
     "negotiation": {
       "id": "negotiation",
       "label": "Negotiation & Communication",
       "description": "Effective communication and negotiation skills.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Chris Voss", "Marshall Rosenberg"],
+        "pioneers": [
+          "Chris Voss",
+          "Marshall Rosenberg"
+        ],
         "books": [
           "Never Split the Difference - Chris Voss",
           "Crucial Conversations - Kerry Patterson"
         ]
       },
-      "parents": ["practical-skills"],
+      "parents": [
+        "practical-skills"
+      ],
       "children": [],
-      "position": {"x": -500, "y": 150, "z": 40}
+      "position": {
+        "x": -500,
+        "y": 150,
+        "z": 40
+      }
     },
-
     "time-management": {
       "id": "time-management",
       "label": "Time Management & Productivity",
       "description": "Organizing time and increasing productivity.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["David Allen", "Cal Newport"],
+        "pioneers": [
+          "David Allen",
+          "Cal Newport"
+        ],
         "books": [
           "Getting Things Done - David Allen",
           "Deep Work - Cal Newport",
           "Atomic Habits - James Clear"
         ]
       },
-      "parents": ["practical-skills"],
+      "parents": [
+        "practical-skills"
+      ],
       "children": [],
-      "position": {"x": -500, "y": 250, "z": 30}
+      "position": {
+        "x": -500,
+        "y": 250,
+        "z": 30
+      }
     },
-
     "relationships": {
       "id": "relationships",
       "label": "Relationships & Social Skills",
       "description": "Building healthy relationships and social dynamics.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["John Gottman", "Brené Brown"],
+        "pioneers": [
+          "John Gottman",
+          "Bren\u00c3\u00a9 Brown"
+        ],
         "books": [
           "The Seven Principles for Making Marriage Work - John Gottman",
-          "Daring Greatly - Brené Brown",
+          "Daring Greatly - Bren\u00c3\u00a9 Brown",
           "Models - Mark Manson"
         ]
       },
-      "parents": ["practical-skills"],
-      "children": ["dating", "marriage", "friendships", "family-dynamics"],
-      "position": {"x": -500, "y": 350, "z": 50}
+      "parents": [
+        "practical-skills"
+      ],
+      "children": [
+        "dating",
+        "marriage",
+        "friendships",
+        "family-dynamics"
+      ],
+      "position": {
+        "x": -500,
+        "y": 350,
+        "z": 50
+      }
     },
-
     "dating": {
       "id": "dating",
       "label": "Dating & Romance",
       "description": "Understanding dating dynamics and attraction.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Corey Wayne", "Mark Manson"],
+        "pioneers": [
+          "Corey Wayne",
+          "Mark Manson"
+        ],
         "books": [
           "The Way of the Superior Man - David Deida",
           "Attached - Amir Levine & Rachel Heller"
         ]
       },
-      "parents": ["relationships"],
+      "parents": [
+        "relationships"
+      ],
       "children": [],
-      "position": {"x": -580, "y": 420, "z": 70}
+      "position": {
+        "x": -580,
+        "y": 420,
+        "z": 70
+      }
     },
-
     "marriage": {
       "id": "marriage",
       "label": "Marriage & Partnership",
       "description": "Long-term committed relationships.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Esther Perel"],
+        "pioneers": [
+          "Esther Perel"
+        ],
         "books": [
           "Mating in Captivity - Esther Perel",
           "The All-or-Nothing Marriage - Eli Finkel"
         ]
       },
-      "parents": ["relationships"],
+      "parents": [
+        "relationships"
+      ],
       "children": [],
-      "position": {"x": -500, "y": 420, "z": 60}
+      "position": {
+        "x": -500,
+        "y": 420,
+        "z": 60
+      }
     },
-
     "friendships": {
       "id": "friendships",
       "label": "Friendships & Community",
       "description": "Building and maintaining meaningful friendships.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Together - Vivek Murthy"]
+        "books": [
+          "Together - Vivek Murthy"
+        ]
       },
-      "parents": ["relationships"],
+      "parents": [
+        "relationships"
+      ],
       "children": [],
-      "position": {"x": -420, "y": 420, "z": 50}
+      "position": {
+        "x": -420,
+        "y": 420,
+        "z": 50
+      }
     },
-
     "family-dynamics": {
       "id": "family-dynamics",
       "label": "Family Dynamics",
       "description": "Understanding family relationships and parenting.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Harville Hendrix"],
+        "pioneers": [
+          "Harville Hendrix"
+        ],
         "books": [
           "Parenting from the Inside Out - Daniel Siegel",
           "The Conscious Parent - Shefali Tsabary"
         ]
       },
-      "parents": ["relationships"],
+      "parents": [
+        "relationships"
+      ],
       "children": [],
-      "position": {"x": -420, "y": 350, "z": 40}
+      "position": {
+        "x": -420,
+        "y": 350,
+        "z": 40
+      }
     },
-
     "health-wellness": {
       "id": "health-wellness",
       "label": "Health & Wellness",
       "description": "Physical and mental health practices.",
       "metadata": {
         "domain": "health",
-        "pioneers": ["Andrew Huberman", "Wim Hof"],
-        "books": ["Why We Sleep - Matthew Walker", "The Body Keeps the Score - Bessel van der Kolk"]
+        "pioneers": [
+          "Andrew Huberman",
+          "Wim Hof"
+        ],
+        "books": [
+          "Why We Sleep - Matthew Walker",
+          "The Body Keeps the Score - Bessel van der Kolk"
+        ]
       },
-      "parents": ["universe"],
-      "children": ["fitness", "nutrition-science", "sleep-hygiene", "mental-health", "stress-management"],
-      "position": {"x": 500, "y": 0, "z": 0}
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "fitness",
+        "nutrition-science",
+        "sleep-hygiene",
+        "mental-health",
+        "stress-management"
+      ],
+      "position": {
+        "x": 500,
+        "y": 0,
+        "z": 0
+      }
     },
-
     "fitness": {
       "id": "fitness",
       "label": "Physical Fitness & Exercise",
       "description": "Training, strength building, and athletic performance.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Arnold Schwarzenegger", "Pavel Tsatsouline"],
+        "pioneers": [
+          "Arnold Schwarzenegger",
+          "Pavel Tsatsouline"
+        ],
         "books": [
           "Starting Strength - Mark Rippetoe",
           "Bigger Leaner Stronger - Michael Matthews",
           "The Complete Strength Training Anatomy - Frederic Delavier"
         ]
       },
-      "parents": ["health-wellness"],
-      "children": ["strength-training", "cardio", "flexibility"],
-      "position": {"x": 600, "y": -150, "z": 80}
+      "parents": [
+        "health-wellness"
+      ],
+      "children": [
+        "strength-training",
+        "cardio",
+        "flexibility"
+      ],
+      "position": {
+        "x": 600,
+        "y": -150,
+        "z": 80
+      }
     },
-
     "strength-training": {
       "id": "strength-training",
       "label": "Strength Training",
       "description": "Building muscle and functional strength.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Practical Programming - Mark Rippetoe"]
+        "books": [
+          "Practical Programming - Mark Rippetoe"
+        ]
       },
-      "parents": ["fitness"],
+      "parents": [
+        "fitness"
+      ],
       "children": [],
-      "position": {"x": 670, "y": -220, "z": 100}
+      "position": {
+        "x": 670,
+        "y": -220,
+        "z": 100
+      }
     },
-
     "cardio": {
       "id": "cardio",
       "label": "Cardiovascular Training",
       "description": "Heart health and endurance training.",
       "metadata": {
         "level": "intermediate",
-        "books": ["80/20 Running - Matt Fitzgerald"]
+        "books": [
+          "80/20 Running - Matt Fitzgerald"
+        ]
       },
-      "parents": ["fitness"],
+      "parents": [
+        "fitness"
+      ],
       "children": [],
-      "position": {"x": 600, "y": -220, "z": 90}
+      "position": {
+        "x": 600,
+        "y": -220,
+        "z": 90
+      }
     },
-
     "flexibility": {
       "id": "flexibility",
       "label": "Flexibility & Mobility",
       "description": "Stretching, yoga, and movement quality.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Kelly Starrett"],
-        "books": ["Becoming a Supple Leopard - Kelly Starrett"]
+        "pioneers": [
+          "Kelly Starrett"
+        ],
+        "books": [
+          "Becoming a Supple Leopard - Kelly Starrett"
+        ]
       },
-      "parents": ["fitness"],
+      "parents": [
+        "fitness"
+      ],
       "children": [],
-      "position": {"x": 530, "y": -220, "z": 80}
+      "position": {
+        "x": 530,
+        "y": -220,
+        "z": 80
+      }
     },
-
     "nutrition-science": {
       "id": "nutrition-science",
       "label": "Nutrition Science",
       "description": "Understanding nutrition and diet science.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Walter Willett", "Nina Teicholz"],
+        "pioneers": [
+          "Walter Willett",
+          "Nina Teicholz"
+        ],
         "books": [
           "Eat That Frog - Brian Tracy",
           "The Case Against Sugar - Gary Taubes",
           "How Not to Die - Michael Greger"
         ]
       },
-      "parents": ["health-wellness"],
+      "parents": [
+        "health-wellness"
+      ],
       "children": [],
-      "position": {"x": 500, "y": -150, "z": 70}
+      "position": {
+        "x": 500,
+        "y": -150,
+        "z": 70
+      }
     },
-
     "sleep-hygiene": {
       "id": "sleep-hygiene",
       "label": "Sleep & Recovery",
       "description": "Sleep science and recovery optimization.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Matthew Walker"],
-        "books": ["Why We Sleep - Matthew Walker", "The Sleep Solution - Chris Winter"]
+        "pioneers": [
+          "Matthew Walker"
+        ],
+        "books": [
+          "Why We Sleep - Matthew Walker",
+          "The Sleep Solution - Chris Winter"
+        ]
       },
-      "parents": ["health-wellness"],
+      "parents": [
+        "health-wellness"
+      ],
       "children": [],
-      "position": {"x": 500, "y": 80, "z": 60}
+      "position": {
+        "x": 500,
+        "y": 80,
+        "z": 60
+      }
     },
-
     "mental-health": {
       "id": "mental-health",
       "label": "Mental Health & Psychology",
       "description": "Mental wellbeing, therapy, and psychology.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Carl Jung", "Carol Dweck"],
+        "pioneers": [
+          "Carl Jung",
+          "Carol Dweck"
+        ],
         "books": [
           "Man's Search for Meaning - Viktor Frankl",
           "Mindset - Carol Dweck",
           "The Body Keeps the Score - Bessel van der Kolk"
         ]
       },
-      "parents": ["health-wellness"],
-      "children": ["meditation", "therapy", "resilience"],
-      "position": {"x": 500, "y": 180, "z": 70}
+      "parents": [
+        "health-wellness"
+      ],
+      "children": [
+        "meditation",
+        "therapy",
+        "resilience"
+      ],
+      "position": {
+        "x": 500,
+        "y": 180,
+        "z": 70
+      }
     },
-
     "meditation": {
       "id": "meditation",
       "label": "Meditation & Mindfulness",
       "description": "Meditation practices and mindfulness training.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Jon Kabat-Zinn", "Thich Nhat Hanh"],
+        "pioneers": [
+          "Jon Kabat-Zinn",
+          "Thich Nhat Hanh"
+        ],
         "books": [
           "Full Catastrophe Living - Jon Kabat-Zinn",
           "The Miracle of Mindfulness - Thich Nhat Hanh"
         ]
       },
-      "parents": ["mental-health"],
+      "parents": [
+        "mental-health"
+      ],
       "children": [],
-      "position": {"x": 570, "y": 250, "z": 80}
+      "position": {
+        "x": 570,
+        "y": 250,
+        "z": 80
+      }
     },
-
     "therapy": {
       "id": "therapy",
       "label": "Therapy & Counseling",
       "description": "Professional mental health interventions.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Sigmund Freud", "Carl Rogers"],
+        "pioneers": [
+          "Sigmund Freud",
+          "Carl Rogers"
+        ],
         "books": [
           "The Therapeutic Relationship - Irvin Yalom",
           "Emotional Intelligence - Daniel Goleman"
         ]
       },
-      "parents": ["mental-health"],
+      "parents": [
+        "mental-health"
+      ],
       "children": [],
-      "position": {"x": 500, "y": 250, "z": 75}
+      "position": {
+        "x": 500,
+        "y": 250,
+        "z": 75
+      }
     },
-
     "resilience": {
       "id": "resilience",
       "label": "Resilience & Grit",
       "description": "Building mental toughness and perseverance.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Angela Duckworth"],
+        "pioneers": [
+          "Angela Duckworth"
+        ],
         "books": [
           "Grit - Angela Duckworth",
           "Antifragile - Nassim Nicholas Taleb"
         ]
       },
-      "parents": ["mental-health"],
+      "parents": [
+        "mental-health"
+      ],
       "children": [],
-      "position": {"x": 430, "y": 250, "z": 70}
+      "position": {
+        "x": 430,
+        "y": 250,
+        "z": 70
+      }
     },
-
     "stress-management": {
       "id": "stress-management",
       "label": "Stress Management",
       "description": "Managing stress and emotional regulation.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Herbert Benson"],
-        "books": ["The Relaxation Response - Herbert Benson"]
+        "pioneers": [
+          "Herbert Benson"
+        ],
+        "books": [
+          "The Relaxation Response - Herbert Benson"
+        ]
       },
-      "parents": ["health-wellness"],
+      "parents": [
+        "health-wellness"
+      ],
       "children": [],
-      "position": {"x": 500, "y": 280, "z": 50}
+      "position": {
+        "x": 500,
+        "y": 280,
+        "z": 50
+      }
     },
-
     "finance": {
       "id": "finance",
       "label": "Personal Finance",
       "description": "Managing money and financial independence.",
       "metadata": {
         "domain": "finance",
-        "pioneers": ["Warren Buffett", "Ramit Sethi", "Morgan Housel"],
+        "pioneers": [
+          "Warren Buffett",
+          "Ramit Sethi",
+          "Morgan Housel"
+        ],
         "books": [
           "The Intelligent Investor - Benjamin Graham",
           "You Are a Badass at Making Money - Jen Sincero",
           "A Random Walk Down Wall Street - Burton Malkiel"
         ]
       },
-      "parents": ["universe"],
-      "children": ["budgeting", "investing", "debt-management", "entrepreneurship"],
-      "position": {"x": 0, "y": -500, "z": 0}
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "budgeting",
+        "investing",
+        "debt-management",
+        "entrepreneurship"
+      ],
+      "position": {
+        "x": 0,
+        "y": -500,
+        "z": 0
+      }
     },
-
     "budgeting": {
       "id": "budgeting",
       "label": "Budgeting & Spending",
       "description": "Personal budget creation and expense tracking.",
       "metadata": {
         "level": "beginner",
-        "pioneers": ["Suze Orman"],
-        "books": ["The Total Money Makeover - Dave Ramsey"]
+        "pioneers": [
+          "Suze Orman"
+        ],
+        "books": [
+          "The Total Money Makeover - Dave Ramsey"
+        ]
       },
-      "parents": ["finance"],
+      "parents": [
+        "finance"
+      ],
       "children": [],
-      "position": {"x": -80, "y": -600, "z": 50}
+      "position": {
+        "x": -80,
+        "y": -600,
+        "z": 50
+      }
     },
-
     "investing": {
       "id": "investing",
       "label": "Investing & Wealth Building",
       "description": "Stock market, real estate, and asset management.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Warren Buffett", "Ray Dalio"],
+        "pioneers": [
+          "Warren Buffett",
+          "Ray Dalio"
+        ],
         "books": [
           "The Intelligent Investor - Benjamin Graham",
           "A Random Walk Down Wall Street - Burton Malkiel",
           "Principles - Ray Dalio"
         ]
       },
-      "parents": ["finance"],
-      "children": ["stock-market", "real-estate", "cryptocurrency"],
-      "position": {"x": 0, "y": -600, "z": 80}
+      "parents": [
+        "finance"
+      ],
+      "children": [
+        "stock-market",
+        "real-estate",
+        "cryptocurrency"
+      ],
+      "position": {
+        "x": 0,
+        "y": -600,
+        "z": 80
+      }
     },
-
     "stock-market": {
       "id": "stock-market",
       "label": "Stock Market & Trading",
       "description": "Understanding stocks and investment strategies.",
       "metadata": {
         "level": "advanced",
-        "books": ["A Beginner's Guide to the Stock Market - Matthew Krantz"]
+        "books": [
+          "A Beginner's Guide to the Stock Market - Matthew Krantz"
+        ]
       },
-      "parents": ["investing"],
+      "parents": [
+        "investing"
+      ],
       "children": [],
-      "position": {"x": 60, "y": -670, "z": 100}
+      "position": {
+        "x": 60,
+        "y": -670,
+        "z": 100
+      }
     },
-
     "real-estate": {
       "id": "real-estate",
       "label": "Real Estate Investment",
       "description": "Property investment and real estate strategy.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Robert Kiyosaki"],
+        "pioneers": [
+          "Robert Kiyosaki"
+        ],
         "books": [
           "Rich Dad Poor Dad - Robert Kiyosaki",
           "The Book on Rental Property Investing - Brandon Turner"
         ]
       },
-      "parents": ["investing"],
+      "parents": [
+        "investing"
+      ],
       "children": [],
-      "position": {"x": 0, "y": -670, "z": 90}
+      "position": {
+        "x": 0,
+        "y": -670,
+        "z": 90
+      }
     },
-
     "cryptocurrency": {
       "id": "cryptocurrency",
       "label": "Cryptocurrency & Blockchain",
       "description": "Digital currencies and blockchain technology.",
       "metadata": {
         "level": "advanced",
-        "pioneers": ["Satoshi Nakamoto"],
+        "pioneers": [
+          "Satoshi Nakamoto"
+        ],
         "books": [
           "The Bitcoin Standard - Saifedean Ammous",
           "Mastering Bitcoin - Andreas M. Antonopoulos"
         ]
       },
-      "parents": ["investing"],
+      "parents": [
+        "investing"
+      ],
       "children": [],
-      "position": {"x": -60, "y": -670, "z": 85}
+      "position": {
+        "x": -60,
+        "y": -670,
+        "z": 85
+      }
     },
-
     "debt-management": {
       "id": "debt-management",
       "label": "Debt Management & Credit",
       "description": "Managing debt and building credit.",
       "metadata": {
         "level": "beginner",
-        "books": ["Debt Free For Life - Dave Ramsey"]
+        "books": [
+          "Debt Free For Life - Dave Ramsey"
+        ]
       },
-      "parents": ["finance"],
+      "parents": [
+        "finance"
+      ],
       "children": [],
-      "position": {"x": 80, "y": -600, "z": 40}
+      "position": {
+        "x": 80,
+        "y": -600,
+        "z": 40
+      }
     },
-
     "entrepreneurship": {
       "id": "entrepreneurship",
       "label": "Entrepreneurship & Business",
       "description": "Starting and running businesses.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Steve Jobs", "Elon Musk"],
+        "pioneers": [
+          "Steve Jobs",
+          "Elon Musk"
+        ],
         "books": [
           "The Lean Startup - Eric Ries",
           "Zero to One - Peter Thiel",
           "The E-Myth - Michael Gerber"
         ]
       },
-      "parents": ["finance"],
-      "children": ["sales", "marketing", "leadership"],
-      "position": {"x": 0, "y": -400, "z": 100}
+      "parents": [
+        "finance"
+      ],
+      "children": [
+        "sales",
+        "marketing",
+        "leadership"
+      ],
+      "position": {
+        "x": 0,
+        "y": -400,
+        "z": 100
+      }
     },
-
     "sales": {
       "id": "sales",
       "label": "Sales & Persuasion",
       "description": "Selling skills and persuasion techniques.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Grant Cardone"],
+        "pioneers": [
+          "Grant Cardone"
+        ],
         "books": [
           "Never Split the Difference - Chris Voss",
           "Influence - Robert Cialdini",
           "The Subtle Art of Not Giving a F*ck - Mark Manson"
         ]
       },
-      "parents": ["entrepreneurship"],
+      "parents": [
+        "entrepreneurship"
+      ],
       "children": [],
-      "position": {"x": 80, "y": -480, "z": 90}
+      "position": {
+        "x": 80,
+        "y": -480,
+        "z": 90
+      }
     },
-
     "marketing": {
       "id": "marketing",
       "label": "Marketing & Branding",
       "description": "Marketing strategies and brand building.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Seth Godin"],
+        "pioneers": [
+          "Seth Godin"
+        ],
         "books": [
           "This is Marketing - Seth Godin",
           "Positioning - Al Ries & Jack Trout"
         ]
       },
-      "parents": ["entrepreneurship"],
+      "parents": [
+        "entrepreneurship"
+      ],
       "children": [],
-      "position": {"x": 0, "y": -480, "z": 95}
+      "position": {
+        "x": 0,
+        "y": -480,
+        "z": 95
+      }
     },
-
     "leadership": {
       "id": "leadership",
       "label": "Leadership & Management",
       "description": "Leading teams and organizational management.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Peter Drucker"],
+        "pioneers": [
+          "Peter Drucker"
+        ],
         "books": [
           "Good to Great - Jim Collins",
           "Start With Why - Simon Sinek",
           "Radical Candor - Kim Scott"
         ]
       },
-      "parents": ["entrepreneurship"],
+      "parents": [
+        "entrepreneurship"
+      ],
       "children": [],
-      "position": {"x": -80, "y": -480, "z": 85}
+      "position": {
+        "x": -80,
+        "y": -480,
+        "z": 85
+      }
     },
-
     "technology": {
       "id": "technology",
       "label": "Technology & Programming",
       "description": "Computing and software development.",
       "metadata": {
         "domain": "STEM",
-        "pioneers": ["Alan Turing", "Grace Hopper"],
+        "pioneers": [
+          "Alan Turing",
+          "Grace Hopper"
+        ],
         "books": [
           "The Pragmatic Programmer - Andrew Hunt & David Thomas",
           "Clean Code - Robert C. Martin"
         ]
       },
-      "parents": ["universe"],
-      "children": ["programming", "data-science", "cybersecurity"],
-      "position": {"x": -300, "y": -300, "z": 0}
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "programming",
+        "data-science",
+        "cybersecurity"
+      ],
+      "position": {
+        "x": -300,
+        "y": -300,
+        "z": 0
+      }
     },
-
     "programming": {
       "id": "programming",
       "label": "Programming & Software Development",
       "description": "Writing and designing software.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Bjarne Stroustrup", "Guido van Rossum"],
+        "pioneers": [
+          "Bjarne Stroustrup",
+          "Guido van Rossum"
+        ],
         "books": [
           "The Pragmatic Programmer - Hunt & Thomas",
           "Code Complete - Steve McConnell",
           "Design Patterns - Gang of Four"
         ]
       },
-      "parents": ["technology"],
-      "children": ["web-development", "mobile-development", "systems-design"],
-      "position": {"x": -380, "y": -400, "z": 60}
+      "parents": [
+        "technology"
+      ],
+      "children": [
+        "web-development",
+        "mobile-development",
+        "systems-design"
+      ],
+      "position": {
+        "x": -380,
+        "y": -400,
+        "z": 60
+      }
     },
-
     "web-development": {
       "id": "web-development",
       "label": "Web Development",
@@ -691,11 +1075,16 @@
           "You Don't Know JS - Kyle Simpson"
         ]
       },
-      "parents": ["programming"],
+      "parents": [
+        "programming"
+      ],
       "children": [],
-      "position": {"x": -450, "y": -480, "z": 80}
+      "position": {
+        "x": -450,
+        "y": -480,
+        "z": 80
+      }
     },
-
     "mobile-development": {
       "id": "mobile-development",
       "label": "Mobile App Development",
@@ -707,11 +1096,16 @@
           "Android Development Guide - Google"
         ]
       },
-      "parents": ["programming"],
+      "parents": [
+        "programming"
+      ],
       "children": [],
-      "position": {"x": -380, "y": -480, "z": 75}
+      "position": {
+        "x": -380,
+        "y": -480,
+        "z": 75
+      }
     },
-
     "systems-design": {
       "id": "systems-design",
       "label": "Systems Design & Architecture",
@@ -723,271 +1117,430 @@
           "System Design Interview - Alex Xu"
         ]
       },
-      "parents": ["programming"],
+      "parents": [
+        "programming"
+      ],
       "children": [],
-      "position": {"x": -310, "y": -480, "z": 85}
+      "position": {
+        "x": -310,
+        "y": -480,
+        "z": 85
+      }
     },
-
     "data-science": {
       "id": "data-science",
       "label": "Data Science & AI",
       "description": "Machine learning and artificial intelligence.",
       "metadata": {
         "level": "advanced",
-        "pioneers": ["Geoffrey Hinton", "Yann LeCun"],
+        "pioneers": [
+          "Geoffrey Hinton",
+          "Yann LeCun"
+        ],
         "books": [
-          "Hands-On Machine Learning - Aurélien Géron",
+          "Hands-On Machine Learning - Aur\u00c3\u00a9lien G\u00c3\u00a9ron",
           "Deep Learning - Goodfellow, Bengio & Courville"
         ]
       },
-      "parents": ["technology"],
-      "children": ["machine-learning", "deep-learning"],
-      "position": {"x": -300, "y": -150, "z": 100}
+      "parents": [
+        "technology"
+      ],
+      "children": [
+        "machine-learning",
+        "deep-learning"
+      ],
+      "position": {
+        "x": -300,
+        "y": -150,
+        "z": 100
+      }
     },
-
     "machine-learning": {
       "id": "machine-learning",
       "label": "Machine Learning",
       "description": "Algorithms and statistical models.",
       "metadata": {
         "level": "advanced",
-        "books": ["Pattern Recognition and Machine Learning - Christopher Bishop"]
+        "books": [
+          "Pattern Recognition and Machine Learning - Christopher Bishop"
+        ]
       },
-      "parents": ["data-science"],
+      "parents": [
+        "data-science"
+      ],
       "children": [],
-      "position": {"x": -360, "y": -100, "z": 110}
+      "position": {
+        "x": -360,
+        "y": -100,
+        "z": 110
+      }
     },
-
     "deep-learning": {
       "id": "deep-learning",
       "label": "Deep Learning & Neural Networks",
       "description": "Neural networks and deep learning.",
       "metadata": {
         "level": "advanced",
-        "books": ["Deep Learning - Goodfellow, Bengio & Courville"]
+        "books": [
+          "Deep Learning - Goodfellow, Bengio & Courville"
+        ]
       },
-      "parents": ["data-science"],
+      "parents": [
+        "data-science"
+      ],
       "children": [],
-      "position": {"x": -240, "y": -100, "z": 115}
+      "position": {
+        "x": -240,
+        "y": -100,
+        "z": 115
+      }
     },
-
     "cybersecurity": {
       "id": "cybersecurity",
       "label": "Cybersecurity & Privacy",
       "description": "Security, hacking, and protecting systems.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Bruce Schneier"],
+        "pioneers": [
+          "Bruce Schneier"
+        ],
         "books": [
           "The Web Application Hacker's Handbook - Stuttard & Pinto",
           "Cryptography Engineering - Ferguson, Schneier & Kohno"
         ]
       },
-      "parents": ["technology"],
+      "parents": [
+        "technology"
+      ],
       "children": [],
-      "position": {"x": -300, "y": 0, "z": 80}
+      "position": {
+        "x": -300,
+        "y": 0,
+        "z": 80
+      }
     },
-
     "arts-crafts": {
       "id": "arts-crafts",
       "label": "Arts & Crafts",
       "description": "Creative skills and artistic expression.",
       "metadata": {
         "domain": "creative",
-        "pioneers": ["Leonardo da Vinci", "Frida Kahlo"],
-        "books": ["The Creative Habit - Twyla Tharp"]
+        "pioneers": [
+          "Leonardo da Vinci",
+          "Frida Kahlo"
+        ],
+        "books": [
+          "The Creative Habit - Twyla Tharp"
+        ]
       },
-      "parents": ["universe"],
-      "children": ["visual-arts", "music", "writing", "photography", "crafts"],
-      "position": {"x": 300, "y": -400, "z": 0}
+      "parents": [
+        "universe"
+      ],
+      "children": [
+        "visual-arts",
+        "music",
+        "writing",
+        "photography",
+        "crafts"
+      ],
+      "position": {
+        "x": 300,
+        "y": -400,
+        "z": 0
+      }
     },
-
     "visual-arts": {
       "id": "visual-arts",
       "label": "Visual Arts & Design",
       "description": "Drawing, painting, and design principles.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Leonardo da Vinci", "Picasso"],
+        "pioneers": [
+          "Leonardo da Vinci",
+          "Picasso"
+        ],
         "books": [
           "Drawing on the Right Side of the Brain - Betty Edwards",
           "The Design of Everyday Things - Don Norman"
         ]
       },
-      "parents": ["arts-crafts"],
-      "children": ["drawing", "painting", "graphic-design"],
-      "position": {"x": 240, "y": -480, "z": 60}
+      "parents": [
+        "arts-crafts"
+      ],
+      "children": [
+        "drawing",
+        "painting",
+        "graphic-design"
+      ],
+      "position": {
+        "x": 240,
+        "y": -480,
+        "z": 60
+      }
     },
-
     "drawing": {
       "id": "drawing",
       "label": "Drawing & Sketching",
       "description": "Drawing techniques and fundamentals.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Drawing Basics and Game Design - Chris Solarski"]
+        "books": [
+          "Drawing Basics and Game Design - Chris Solarski"
+        ]
       },
-      "parents": ["visual-arts"],
+      "parents": [
+        "visual-arts"
+      ],
       "children": [],
-      "position": {"x": 200, "y": -540, "z": 75}
+      "position": {
+        "x": 200,
+        "y": -540,
+        "z": 75
+      }
     },
-
     "painting": {
       "id": "painting",
       "label": "Painting",
       "description": "Oil, acrylic, and watercolor painting.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Alla Prima - Richard Schmid"]
+        "books": [
+          "Alla Prima - Richard Schmid"
+        ]
       },
-      "parents": ["visual-arts"],
+      "parents": [
+        "visual-arts"
+      ],
       "children": [],
-      "position": {"x": 240, "y": -540, "z": 70}
+      "position": {
+        "x": 240,
+        "y": -540,
+        "z": 70
+      }
     },
-
     "graphic-design": {
       "id": "graphic-design",
       "label": "Graphic Design",
       "description": "Digital design and visual communication.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Thinking with Type - Ellen Lupton"]
+        "books": [
+          "Thinking with Type - Ellen Lupton"
+        ]
       },
-      "parents": ["visual-arts"],
+      "parents": [
+        "visual-arts"
+      ],
       "children": [],
-      "position": {"x": 280, "y": -540, "z": 65}
+      "position": {
+        "x": 280,
+        "y": -540,
+        "z": 65
+      }
     },
-
     "music": {
       "id": "music",
       "label": "Music & Sound",
       "description": "Music theory, composition, and performance.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Ludwig van Beethoven", "Miles Davis"],
+        "pioneers": [
+          "Ludwig van Beethoven",
+          "Miles Davis"
+        ],
         "books": [
           "Music Theory for Dummies - Michael Pilhofer",
           "The Jazz of Physics - Stephon Alexander"
         ]
       },
-      "parents": ["arts-crafts"],
-      "children": ["music-theory", "instrument-playing", "production"],
-      "position": {"x": 360, "y": -480, "z": 70}
+      "parents": [
+        "arts-crafts"
+      ],
+      "children": [
+        "music-theory",
+        "instrument-playing",
+        "production"
+      ],
+      "position": {
+        "x": 360,
+        "y": -480,
+        "z": 70
+      }
     },
-
     "music-theory": {
       "id": "music-theory",
       "label": "Music Theory",
       "description": "Harmony, melody, and composition basics.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Harmony - Walter Piston"]
+        "books": [
+          "Harmony - Walter Piston"
+        ]
       },
-      "parents": ["music"],
+      "parents": [
+        "music"
+      ],
       "children": [],
-      "position": {"x": 340, "y": -540, "z": 80}
+      "position": {
+        "x": 340,
+        "y": -540,
+        "z": 80
+      }
     },
-
     "instrument-playing": {
       "id": "instrument-playing",
       "label": "Learning an Instrument",
       "description": "Playing piano, guitar, or other instruments.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Guitar Aerobics - Troy Nelson"]
+        "books": [
+          "Guitar Aerobics - Troy Nelson"
+        ]
       },
-      "parents": ["music"],
+      "parents": [
+        "music"
+      ],
       "children": [],
-      "position": {"x": 360, "y": -540, "z": 75}
+      "position": {
+        "x": 360,
+        "y": -540,
+        "z": 75
+      }
     },
-
     "production": {
       "id": "production",
       "label": "Music Production & Recording",
       "description": "Recording, mixing, and music production.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Mixing Secrets for the Small Studio - Mike Senior"]
+        "books": [
+          "Mixing Secrets for the Small Studio - Mike Senior"
+        ]
       },
-      "parents": ["music"],
+      "parents": [
+        "music"
+      ],
       "children": [],
-      "position": {"x": 380, "y": -540, "z": 85}
+      "position": {
+        "x": 380,
+        "y": -540,
+        "z": 85
+      }
     },
-
     "writing": {
       "id": "writing",
       "label": "Writing & Communication",
       "description": "Writing skills and storytelling.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Stephen King", "George Orwell"],
+        "pioneers": [
+          "Stephen King",
+          "George Orwell"
+        ],
         "books": [
           "On Writing - Stephen King",
           "Politics and the English Language - George Orwell",
           "Bird by Bird - Anne Lamott"
         ]
       },
-      "parents": ["arts-crafts"],
-      "children": ["creative-writing", "technical-writing", "journalism"],
-      "position": {"x": 300, "y": -300, "z": 80}
+      "parents": [
+        "arts-crafts"
+      ],
+      "children": [
+        "creative-writing",
+        "technical-writing",
+        "journalism"
+      ],
+      "position": {
+        "x": 300,
+        "y": -300,
+        "z": 80
+      }
     },
-
     "creative-writing": {
       "id": "creative-writing",
       "label": "Creative Writing & Storytelling",
       "description": "Fiction, poetry, and narrative techniques.",
       "metadata": {
         "level": "intermediate",
-        "books": ["Wonderbook - Jeff VanderMeer"]
+        "books": [
+          "Wonderbook - Jeff VanderMeer"
+        ]
       },
-      "parents": ["writing"],
+      "parents": [
+        "writing"
+      ],
       "children": [],
-      "position": {"x": 260, "y": -240, "z": 90}
+      "position": {
+        "x": 260,
+        "y": -240,
+        "z": 90
+      }
     },
-
     "technical-writing": {
       "id": "technical-writing",
       "label": "Technical Writing",
       "description": "Documentation and technical communication.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Technical Writer's Handbook - Matt Young"]
+        "books": [
+          "The Technical Writer's Handbook - Matt Young"
+        ]
       },
-      "parents": ["writing"],
+      "parents": [
+        "writing"
+      ],
       "children": [],
-      "position": {"x": 300, "y": -240, "z": 85}
+      "position": {
+        "x": 300,
+        "y": -240,
+        "z": 85
+      }
     },
-
     "journalism": {
       "id": "journalism",
       "label": "Journalism & Reporting",
       "description": "News writing and investigative reporting.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Elements of Journalism - Bill Kovach"]
+        "books": [
+          "The Elements of Journalism - Bill Kovach"
+        ]
       },
-      "parents": ["writing"],
+      "parents": [
+        "writing"
+      ],
       "children": [],
-      "position": {"x": 340, "y": -240, "z": 80}
+      "position": {
+        "x": 340,
+        "y": -240,
+        "z": 80
+      }
     },
-
     "photography": {
       "id": "photography",
       "label": "Photography",
       "description": "Photography techniques and visual storytelling.",
       "metadata": {
         "level": "intermediate",
-        "pioneers": ["Ansel Adams"],
+        "pioneers": [
+          "Ansel Adams"
+        ],
         "books": [
           "The Photography Handbook - Terence Wright",
           "Light Science and Magic - Fil Hunter"
         ]
       },
-      "parents": ["arts-crafts"],
+      "parents": [
+        "arts-crafts"
+      ],
       "children": [],
-      "position": {"x": 420, "y": -400, "z": 70}
+      "position": {
+        "x": 420,
+        "y": -400,
+        "z": 70
+      }
     },
-
     "crafts": {
       "id": "crafts",
       "label": "Crafts & Making",
@@ -999,50 +1552,565 @@
           "The Maker's Manual - Dalton Conley & Robert M. Soden"
         ]
       },
-      "parents": ["arts-crafts"],
-      "children": ["jewelry-making", "pottery", "leather-work"],
-      "position": {"x": 300, "y": -200, "z": 70}
+      "parents": [
+        "arts-crafts"
+      ],
+      "children": [
+        "jewelry-making",
+        "pottery",
+        "leather-work"
+      ],
+      "position": {
+        "x": 300,
+        "y": -200,
+        "z": 70
+      }
     },
-
     "jewelry-making": {
       "id": "jewelry-making",
       "label": "Jewelry Making",
       "description": "Creating jewelry from various materials.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Complete Modern Jewelry Maker - Carles Codina"]
+        "books": [
+          "The Complete Modern Jewelry Maker - Carles Codina"
+        ]
       },
-      "parents": ["crafts"],
+      "parents": [
+        "crafts"
+      ],
       "children": [],
-      "position": {"x": 260, "y": -130, "z": 80}
+      "position": {
+        "x": 260,
+        "y": -130,
+        "z": 80
+      }
     },
-
     "pottery": {
       "id": "pottery",
       "label": "Pottery & Ceramics",
       "description": "Throwing, handbuilding, and firing pottery.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Complete Modern Pottery - Emmanuel Cooper"]
+        "books": [
+          "The Complete Modern Pottery - Emmanuel Cooper"
+        ]
       },
-      "parents": ["crafts"],
+      "parents": [
+        "crafts"
+      ],
       "children": [],
-      "position": {"x": 300, "y": -130, "z": 75}
+      "position": {
+        "x": 300,
+        "y": -130,
+        "z": 75
+      }
     },
-
     "leather-work": {
       "id": "leather-work",
       "label": "Leatherworking",
       "description": "Crafting items from leather.",
       "metadata": {
         "level": "intermediate",
-        "books": ["The Art of Leather Craft - Al Stohlman"]
+        "books": [
+          "The Art of Leather Craft - Al Stohlman"
+        ]
       },
-      "parents": ["crafts"],
+      "parents": [
+        "crafts"
+      ],
       "children": [],
-      "position": {"x": 340, "y": -130, "z": 70}
+      "position": {
+        "x": 340,
+        "y": -130,
+        "z": 70
+      }
     }
   },
-  "edges": [],
+  "edges": [
+    {
+      "id": "adf94cd6-77b8-4bfb-869f-f6e3ab5f0723",
+      "source": "universe",
+      "target": "science",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "5376f5e4-8455-4cad-9c55-5a6395830693",
+      "source": "universe",
+      "target": "mathematics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "601812ed-be38-46f8-bd46-a564df9e0674",
+      "source": "universe",
+      "target": "humanities",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "deda63b1-e83b-4d5c-87c5-ebf9416d4a43",
+      "source": "universe",
+      "target": "technology",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "ff3b6118-3707-45cb-9124-9e679309351e",
+      "source": "universe",
+      "target": "practical-skills",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "5675fe0f-ff3b-4ae0-a853-dcdd27a1e1d0",
+      "source": "universe",
+      "target": "health-wellness",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "c7e1312e-d029-43ae-95cc-fb8195ad52a9",
+      "source": "universe",
+      "target": "finance",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "75085e36-b549-4eca-8f72-1735ec48270a",
+      "source": "universe",
+      "target": "arts-crafts",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "b8c138a4-f501-4ecb-b9dc-0df2a503cd65",
+      "source": "practical-skills",
+      "target": "cooking",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "db468dfc-4aeb-4ba8-b0c0-7bc10e7a23a8",
+      "source": "practical-skills",
+      "target": "home-maintenance",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "d35e45d3-a8d2-4e78-82ec-96238b403149",
+      "source": "practical-skills",
+      "target": "negotiation",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "8b7b6757-d6bb-4afd-9441-fb32d838eb24",
+      "source": "practical-skills",
+      "target": "time-management",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "e0ca0940-9184-43cb-bef0-21b12fa9458f",
+      "source": "practical-skills",
+      "target": "relationships",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "bf8cbfa8-df8a-460c-9c00-aeaf67cd0083",
+      "source": "cooking",
+      "target": "meal-planning",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "cfd2e670-ca86-472a-b67f-111403bb5a74",
+      "source": "cooking",
+      "target": "food-preservation",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "7c4ab3df-c195-481c-9ddf-5b38ebb81b8d",
+      "source": "cooking",
+      "target": "culinary-techniques",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "59a74115-cdc8-4235-a1fe-8a36f5d91a86",
+      "source": "home-maintenance",
+      "target": "plumbing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "a749fa6e-d972-4988-8e0b-6d872c25440f",
+      "source": "home-maintenance",
+      "target": "electrical",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "e75cf896-2e9e-4f22-beb8-c9b3e2b020ab",
+      "source": "home-maintenance",
+      "target": "carpentry",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "cd5b8d8b-95a5-439b-9bb9-e9fb2ddf8a9b",
+      "source": "relationships",
+      "target": "dating",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "c6168b8b-ea24-4175-9003-056dad92dcdc",
+      "source": "relationships",
+      "target": "marriage",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "71b91bc0-9fc9-4854-9a3c-47aa0a8b5797",
+      "source": "relationships",
+      "target": "friendships",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "38b8ab92-2f97-4ffa-9c10-bffd9c551ab9",
+      "source": "relationships",
+      "target": "family-dynamics",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "192918ec-8e20-4656-b8f0-54385a232616",
+      "source": "health-wellness",
+      "target": "fitness",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "87298ed1-9b76-438e-812a-fa08f97c4baa",
+      "source": "health-wellness",
+      "target": "nutrition-science",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "e84c33ac-a2fb-40c6-acc6-a3050cf69029",
+      "source": "health-wellness",
+      "target": "sleep-hygiene",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "cd9b9118-6853-43c8-bf88-1556657628fc",
+      "source": "health-wellness",
+      "target": "mental-health",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "fe4b872b-437f-43c7-a2aa-85bc9d6a2e21",
+      "source": "health-wellness",
+      "target": "stress-management",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "8a402580-d0e4-4365-a7a1-83a03d007407",
+      "source": "fitness",
+      "target": "strength-training",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "5ee9f57c-1754-46ff-90d0-b6b247af5f83",
+      "source": "fitness",
+      "target": "cardio",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "e46b5ef7-335b-4f69-9751-bf8a3fa79eef",
+      "source": "fitness",
+      "target": "flexibility",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "4a1be4b1-f664-4b98-bda3-c4380f392b48",
+      "source": "mental-health",
+      "target": "meditation",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "dfb9bb60-936d-41ac-8d56-f3ea4fe64dd0",
+      "source": "mental-health",
+      "target": "therapy",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "246824fd-62ea-4a68-a413-0f66d00f9be2",
+      "source": "mental-health",
+      "target": "resilience",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "d36d9e29-b6d2-436b-9a4b-109d714a141f",
+      "source": "finance",
+      "target": "budgeting",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "963c460c-c1d6-4b4e-87f3-812e216f5d63",
+      "source": "finance",
+      "target": "investing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "b16438a8-fbfb-4897-8fe7-2a3c0fa162a5",
+      "source": "finance",
+      "target": "debt-management",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "22575184-8cff-4e6f-bd95-3a4ad0d4d440",
+      "source": "finance",
+      "target": "entrepreneurship",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "3cd86f55-e6f7-4e28-bda6-3167c228af3b",
+      "source": "investing",
+      "target": "stock-market",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "8e15f50c-fac6-4378-803b-67ee90aa7b5c",
+      "source": "investing",
+      "target": "real-estate",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "f422c99b-c852-4b3f-8a31-af40cfd6017c",
+      "source": "investing",
+      "target": "cryptocurrency",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "a02fc9f5-d439-4de6-83f1-f7a8602248cc",
+      "source": "entrepreneurship",
+      "target": "sales",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "f06e80fa-e010-4713-9557-a6c97a4c0fbc",
+      "source": "entrepreneurship",
+      "target": "marketing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "996c1daf-09e0-4ea4-9226-295cfd7b8259",
+      "source": "entrepreneurship",
+      "target": "leadership",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "2bb6ad02-0dc4-45a2-98d7-a62368cd1494",
+      "source": "technology",
+      "target": "programming",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "733f2716-7787-4581-9fdd-9222cfaaa52b",
+      "source": "technology",
+      "target": "data-science",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "349c72e9-af0a-4a82-918b-b74ee20d9b44",
+      "source": "technology",
+      "target": "cybersecurity",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "8e72f894-34ea-4bf9-bcb0-cc650dff59ce",
+      "source": "programming",
+      "target": "web-development",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "6a7742a4-fa2e-4b1e-850c-35170802c189",
+      "source": "programming",
+      "target": "mobile-development",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "ea564c6f-c3e1-4a56-a70c-3d703af9faef",
+      "source": "programming",
+      "target": "systems-design",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "25f629b6-a240-4ac7-ba1a-4d83de1cf835",
+      "source": "data-science",
+      "target": "machine-learning",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "c4bb6c82-ec00-48d9-8627-ce79ea527bdc",
+      "source": "data-science",
+      "target": "deep-learning",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "8a932e03-f6e4-48ee-856e-9e130d58f952",
+      "source": "arts-crafts",
+      "target": "visual-arts",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "2c67717d-5e85-44af-b312-2436adfd4271",
+      "source": "arts-crafts",
+      "target": "music",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "c469281e-3dd2-46b9-aeec-03bdb99108df",
+      "source": "arts-crafts",
+      "target": "writing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "08a87914-e8c4-43a1-9b49-b6376ba97e8d",
+      "source": "arts-crafts",
+      "target": "photography",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "b3ebd24b-31f2-4cd4-8fbc-f8db824cb395",
+      "source": "arts-crafts",
+      "target": "crafts",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "5cfad05e-66dc-4f9c-b8d6-35439f64f51f",
+      "source": "visual-arts",
+      "target": "drawing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "717c565c-42ac-4917-a23f-440a7d42c686",
+      "source": "visual-arts",
+      "target": "painting",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "3027cfaa-c4c0-472c-946f-79161992f02e",
+      "source": "visual-arts",
+      "target": "graphic-design",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "20fb5ac9-9af4-43b0-846b-b97900770c5b",
+      "source": "music",
+      "target": "music-theory",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "602ef316-8b86-4824-be9d-ec9dfd17fdbf",
+      "source": "music",
+      "target": "instrument-playing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "1b69ee79-07ed-4cca-87c6-2379c0010287",
+      "source": "music",
+      "target": "production",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "67f9ec13-268d-47d4-9728-977fd52c095f",
+      "source": "writing",
+      "target": "creative-writing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "86a58fca-158b-4077-8030-ed0ce40bb3ee",
+      "source": "writing",
+      "target": "technical-writing",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "75549dc4-c1a4-44f0-95e5-9bf405f6d19e",
+      "source": "writing",
+      "target": "journalism",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "4cd5d965-260c-49b2-bb15-6bdd2a47f44f",
+      "source": "crafts",
+      "target": "jewelry-making",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "46268967-4c5d-4c68-b4cc-5dbb754cfaaa",
+      "source": "crafts",
+      "target": "pottery",
+      "type": "hierarchy",
+      "strength": 1
+    },
+    {
+      "id": "46e604df-ef05-45cc-ac77-50f486522651",
+      "source": "crafts",
+      "target": "leather-work",
+      "type": "hierarchy",
+      "strength": 1
+    }
+  ],
   "rootId": "universe"
 }
