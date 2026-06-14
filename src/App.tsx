@@ -1738,6 +1738,51 @@ function App() {
 
       <button type="button" className="home-button" onClick={goToHomeUniverse}>Home</button>
 
+      <details className="legend-panel">
+        <summary>Legend</summary>
+        <div className="legend-content">
+          <h4>Node Colors</h4>
+          <ul className="legend-list">
+            <li>
+              <span className="legend-swatch" style={{ background: '#f6d889' }} aria-hidden="true" />
+              <span>Current Node</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#ff9f6b' }} aria-hidden="true" />
+              <span>Parent of Current</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#4edab5' }} aria-hidden="true" />
+              <span>Child of Current</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#d58dff' }} aria-hidden="true" />
+              <span>Both Parent and Child</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#57a6ff' }} aria-hidden="true" />
+              <span>Other Visible Node</span>
+            </li>
+          </ul>
+
+          <h4>Link Colors</h4>
+          <ul className="legend-list">
+            <li>
+              <span className="legend-swatch" style={{ background: '#66d5ff' }} aria-hidden="true" />
+              <span>Hierarchy</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#91f5ba' }} aria-hidden="true" />
+              <span>Related</span>
+            </li>
+            <li>
+              <span className="legend-swatch" style={{ background: '#ffbe7d' }} aria-hidden="true" />
+              <span>Depends-on</span>
+            </li>
+          </ul>
+        </div>
+      </details>
+
       {panelMode === 'admin' && renderAdminPage()}
 
       {panelMode !== 'none' && panelMode !== 'admin' && (
