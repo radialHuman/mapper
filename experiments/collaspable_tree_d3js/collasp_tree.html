@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Interactive Data Tree</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      margin: 20px;
+      background: #f9f9f9;
+    }
+
+    h2 {
+      margin-top: 0;
+    }
+
+    .controls {
+      margin-bottom: 15px;
+      padding: 10px;
+      background: #fff;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    }
+
+    button {
+      cursor: pointer;
+      padding: 8px 12px;
+      margin-right: 5px;
+      border: 1px solid #ccc;
+      background: #fff;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    button:hover {
+      background: #eee;
+    }
+
+    button.add {
+      background: #e6fffa;
+      border-color: #38b2ac;
+      color: #2c7a7b;
+    }
+
+    button.remove {
+      background: #fff5f5;
+      border-color: #fc8181;
+      color: #c53030;
+    }
+
+    button.save {
+      background: #ebf8ff;
+      border-color: #4299e1;
+      color: #2b6cb0;
+      font-weight: bold;
+    }
+
+    #chart {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      overflow: auto;
+    }
+
+    svg {
+      font: 10px sans-serif;
+    }
+
+    text {
+      pointer-events: none;
+    }
+
+    .loading {
+      color: #666;
+      font-style: italic;
+    }
+
+    .error {
+      color: #c53030;
+      font-weight: bold;
+    }
+  </style>
+</head>
+
+<body>
+
+  <h2>Interactive Data Tree</h2>
+
+  <div class="controls">
+    <strong>Actions:</strong>
+    <button id="addNodeBtn" class="add">➕ Add Child to Selected</button>
+    <button id="removeNodeBtn" class="remove">➖ Remove Selected Node</button>
+    <span style="margin: 0 10px; color: #888;">|</span>
+    <button id="saveBtn" class="save">💾 Save to data.json (Download)</button>
+    <br>
+    <small style="color: #666; margin-top: 5px; display: block;">
+      * Click a node to select it. * Add/Remove works on the <b>selected</b> node. * Click "Save" to download the new
+      JSON.
+    </small>
+  </div>
+
+  <div id="chart">
+    <div class="loading">Loading data.json...</div>
+  </div>
+
+  <script src="https://d3js.org/d3.v7.min.js"></script>
+
+  <script>
+    // --- Configuration ---
+    const width = 928;
+    const marginTop = 20;
+    const marginRight = 20;
+    const marginBottom = 20;
+    const marginLeft = 40;
+    const dx = 25;
+    const dy = 150;
+
+    let root;
+    let selectedNode = null;
+
+    // Create SVG container
+    const svg = d3.create("svg")
+      .attr("width", width)
+      .attr("height", 500)
+      .attr("viewBox", [-marginLeft, -marginTop, width, 500])
+      .attr("style", "max-width: 100%; height: auto; font: 12px sans-serif; user-select: none;");
+
+    const gLink = svg.append("g")
+      .attr("fill", "none")
+      .attr("stroke", "#999")
+      .attr("stroke-opacity", 0.4)
+      .attr("stroke-width", 1.5);
+
+    const gNode = svg.append("g")
+      .attr("cursor", "pointer")
+      .attr("pointer-events", "all");
+
+    // --- 1. Load Data ---
+    async function loadData() {
+      try {
+        const response = await fetch('data.json');
+        if (!response.ok) throw new Error("File not found");
+        const data = await response.json();
+        initTree(data);
+      } catch (error) {
+        document.getElementById("chart").innerHTML = `<div class="error">Error: ${error.message}.<br>Make sure 'data.json' exists and you are running a local server.</div>`;
+      }
+    }
+
+    // --- 2. Initialize Tree (Where diagonal is defined) ---
+    function initTree(data) {
+      root = d3.hierarchy(data);
+
+      // Define layout and diagonal here
+      const tree = d3.tree().nodeSize([dx, dy]);
+      const diagonal = d3.linkHorizontal().x(d => d.y).y(d => d.x);
+
+      // Initial layout
+      root.x0 = dy / 2;
+      root.y0 = 0;
+
+      // Expand root by default, collapse others
+      root.descendants().forEach((d, i) => {
+        d.id = i;
+        d._children = d.children;
+        if (d.depth) d.children = null;
+      });
+
+      // Define update function INSIDE initTree so it has access to 'diagonal'
+      function update(event, source) {
+        const duration = event?.altKey ? 2500 : 300;
+        const nodes = root.descendants().reverse();
+        const links = root.links();
+
+        tree(root); // Apply layout
+
+        let left = root;
+        let right = root;
+        root.eachBefore(node => {
+          if (node.x < left.x) left = node;
+          if (node.x > right.x) right = node;
+        });
+
+        const height = right.x - left.x + marginTop + marginBottom;
+
+        const transition = svg.transition()
+          .duration(duration)
+          .attr("height", height)
+          .attr("viewBox", [-marginLeft, left.x - marginTop, width, height]);
+
+        // --- Nodes ---
+        const node = gNode.selectAll("g")
+          .data(nodes, d => d.id);
+
+        const nodeEnter = node.enter().append("g")
+          .attr("transform", d => `translate(${source.y0},${source.x0})`)
+          .attr("fill-opacity", 0)
+          .attr("stroke-opacity", 0);
+
+        // Click handler for selection
+        nodeEnter.on("click", (event, d) => {
+          event.stopPropagation();
+          selectedNode = d;
+          d.children = d.children ? null : d._children;
+          update(event, d);
+        });
+
+        nodeEnter.append("circle")
+          .attr("r", 5)
+          .attr("fill", d => d._children ? "#555" : "#999")
+          .attr("stroke", d => d === selectedNode ? "#2563eb" : "none")
+          .attr("stroke-width", d => d === selectedNode ? 3 : 1)
+          .attr("stroke-opacity", d => d === selectedNode ? 1 : 0.5);
+
+        nodeEnter.append("text")
+          .attr("dy", "0.31em")
+          .attr("x", d => d._children ? -12 : 12)
+          .attr("text-anchor", d => d._children ? "end" : "start")
+          .text(d => d.data.name)
+          .clone(true).lower()
+          .attr("stroke", "white")
+          .attr("stroke-width", 3);
+
+        const nodeUpdate = node.merge(nodeEnter).transition(transition)
+          .attr("transform", d => `translate(${d.y},${d.x})`)
+          .attr("fill-opacity", 1)
+          .attr("stroke-opacity", 1);
+
+        nodeUpdate.select("circle")
+          .attr("stroke", d => d === selectedNode ? "#2563eb" : "none")
+          .attr("stroke-width", d => d === selectedNode ? 3 : 1);
+
+        const nodeExit = node.exit().transition(transition).remove()
+          .attr("transform", d => `translate(${source.y},${source.x})`)
+          .attr("fill-opacity", 0)
+          .attr("stroke-opacity", 0);
+
+        // --- Links ---
+        const link = gLink.selectAll("path")
+          .data(links, d => d.target.id);
+
+        const linkEnter = link.enter().append("path")
+          .attr("d", d => {
+            const o = { x: source.x0, y: source.y0 };
+            return diagonal({ source: o, target: o }); // Uses diagonal from outer scope
+          });
+
+        link.merge(linkEnter).transition(transition)
+          .attr("d", diagonal); // Uses diagonal from outer scope
+
+        link.exit().transition(transition).remove()
+          .attr("d", d => {
+            const o = { x: source.x, y: source.y };
+            return diagonal({ source: o, target: o });
+          });
+
+        root.eachBefore(d => {
+          d.x0 = d.x;
+          d.y0 = d.y;
+        });
+      }
+
+      // Initial call
+      update(null, root);
+      document.getElementById("chart").innerHTML = "";
+      document.getElementById("chart").appendChild(svg.node());
+    }
+
+    // --- 3. Add Node Logic ---
+    document.getElementById('addNodeBtn').addEventListener('click', () => {
+      if (!selectedNode) {
+        alert("Please click a node first to select where to add the child.");
+        return;
+      }
+
+      const name = prompt("Enter name for new child:", "New Node");
+      if (!name) return;
+
+      if (!selectedNode.data.children) {
+        selectedNode.data.children = [];
+      }
+      selectedNode.data.children.push({ name: name });
+
+      // Re-hierarchy
+      root = d3.hierarchy(root.data, d => d.children);
+
+      // Restore state
+      root.descendants().forEach(d => {
+        d._children = d.children;
+        if (d.depth) d.children = null;
+      });
+
+      // We need to re-trigger update. Since update is inside initTree, we can't call it directly here.
+      // We need to re-run initTree or refactor. 
+      // Simplest fix: Re-run initTree with the new data.
+      initTree(root.data);
+    });
+
+    // --- 4. Remove Node Logic ---
+    document.getElementById('removeNodeBtn').addEventListener('click', () => {
+      if (!selectedNode) {
+        alert("Please click a node first to select it for removal.");
+        return;
+      }
+      if (selectedNode.depth === 0) {
+        alert("Cannot remove the Root node.");
+        return;
+      }
+
+      if (!confirm(`Are you sure you want to remove "${selectedNode.data.name}" and all its children?`)) return;
+
+      const parent = selectedNode.parent;
+      if (parent) {
+        parent.data.children = parent.data.children.filter(child => child !== selectedNode.data);
+        root = d3.hierarchy(root.data, d => d.children);
+        root.descendants().forEach(d => {
+          d._children = d.children;
+          if (d.depth) d.children = null;
+        });
+        selectedNode = null;
+        initTree(root.data);
+      }
+    });
+
+    // --- 5. Save Logic ---
+    document.getElementById('saveBtn').addEventListener('click', () => {
+      if (!root) return;
+      const dataToSave = root.data;
+      const now = new Date();
+      const timestampInt = now.getTime(); // Unix epoch in milliseconds without separators
+      dataToSave.timestamp = timestampInt;
+      const fileName = `data_${timestampInt}.json`;
+
+      const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(dataToSave, null, 2));
+      const downloadAnchorNode = document.createElement('a');
+      downloadAnchorNode.setAttribute("href", dataStr);
+      downloadAnchorNode.setAttribute("download", fileName);
+      document.body.appendChild(downloadAnchorNode);
+      downloadAnchorNode.click();
+      downloadAnchorNode.remove();
+    });
+
+    // Start
+    loadData();
+    svg.on("click", () => {
+      selectedNode = null;
+      // Note: To re-render without re-hierarchy, we'd need a more complex refactoring.
+      // For now, we just clear selection visually if we wanted, but re-init is safer.
+      // Since update is inside initTree, we can't easily call it here without moving it out.
+      // But the visual update happens on click.
+    });
+
+  </script>
+</body>
+
+</html>

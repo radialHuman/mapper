@@ -1,0 +1,24 @@
+{
+    "name": "Root Company",
+    "children": [
+        {
+            "name": "Department A",
+            "children": [
+                {
+                    "name": "Team 1"
+                },
+                {
+                    "name": "Team 2"
+                }
+            ]
+        },
+        {
+            "name": "Department B",
+            "children": [
+                {
+                    "name": "Team 3"
+                }
+            ]
+        }
+    ]
+}
